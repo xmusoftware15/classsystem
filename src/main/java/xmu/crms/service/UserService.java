@@ -56,7 +56,7 @@ public interface UserService {
 	
 	/**
 	 * 用户解绑.
-	 * <p>教师解绑账号<br>
+	 * <p>教师解绑账号(j2ee使用)<br>
 	 * @author qinlingyun
 	 * @param userId 用户id
 	 * @return true 解绑成功 false 解绑失败
@@ -71,7 +71,7 @@ public interface UserService {
 	
 	/**
 	 * 用户解绑.
-	 * <p>学生解绑账号<br>
+	 * <p>学生解绑账号(j2ee使用)<br>
 	 * @author qinlingyun 
 	 * @param userId 用户id
 	 * @return true 解绑成功 false 解绑失败
