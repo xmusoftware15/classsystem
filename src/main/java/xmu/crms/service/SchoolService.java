@@ -9,7 +9,7 @@ import xmu.crms.entity.*;
 /**
  * 
  * @author LiuAiqi
- * @version 1.00
+ * @version 2.00
  *
  */
 public interface SchoolService {
@@ -20,7 +20,7 @@ public interface SchoolService {
 	 * @param city 城市名称
 	 * @return list 学校列表
 	 */
-	public List<School> listSchoolByCity(String city);
+	 List<School> listSchoolByCity(String city);
 	
 	/**
 	 * 添加学校.
@@ -29,7 +29,7 @@ public interface SchoolService {
 	 * @param school 学校的信息
 	 * @return true（添加学校成功）/false（添加学校未成功）
 	 */
-	public Boolean insertSchool(School school);
+	 Boolean insertSchool(School school);
 	
 	/**
 	 * 获取省份列表.
@@ -37,7 +37,7 @@ public interface SchoolService {
 	 * @author LiuAiqi
 	 * @return list 省份名称列表
 	 */
-	public List<String> listProvince();
+	 List<String> listProvince();
 	
 	/**
 	 * 获取城市列表.
@@ -46,7 +46,7 @@ public interface SchoolService {
 	 * @param province 省份名称
 	 * @return list 城市名称列表
 	 */
-	public List<String> listCity(String province);
+	 List<String> listCity(String province);
 	
 	/**
 	 * 获取学校信息.
@@ -55,5 +55,5 @@ public interface SchoolService {
 	 * @param SchoolId 学校id
 	 * @return SchoolBO 学校信息
 	 */
-	public School getSchoolBySchoolId(BigInteger SchoolId);
+	 School getSchoolBySchoolId(BigInteger SchoolId);
 }

@@ -6,7 +6,7 @@ import xmu.crms.entity.*;
 
 /**
  * @author ModuleStandardGroup/YeHongjie
- * @version 1.10
+ * @version 2.00
  */
 public interface LoginService {
 	
@@ -20,15 +20,15 @@ public interface LoginService {
 	 * @param successUrl 微信OAuth2授权后跳转到的网址
 	 * @return user 该用户信息
 	 */
-	public User signInWeChat(BigInteger userId,String code,String state,String successUrl);
+	 User signInWeChat(BigInteger userId,String code,String state,String successUrl);
 	
 	
 	/**
 	 * 手机号登录.
-	 * <p>手机号登录 (.Net使用)<br>*User中只有phone和password，用于判断用户名密码是否正确<br>
+	 * <p>手机号登录 (.Net使用),User中只有phone和password，用于判断用户名密码是否正确<br>
 	 * @author qinlingyun 
 	 * @param user 用户信息(手机号Phone和密码Password)
 	 * @return user 该用户信息
 	 */
-	public User signInPhone(User user);
+	 User signInPhone(User user);
 }

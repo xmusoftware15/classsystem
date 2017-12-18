@@ -1,16 +1,16 @@
-﻿package xmu.crms.service;
-
+package xmu.crms.service;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import xmu.crms.entity.*;
+import xmu.crms.exception.*;
 
 
 /**
  * 
  * @author ModuleStandardGroup/zhouzhongjun
- * @version 1.00
+ * @version 2.00
  *
  */
 public interface SeminarGroupService {
@@ -21,7 +21,7 @@ public interface SeminarGroupService {
      * @param seminarGroupId 讨论课小组Id
      * @return true/false 是否成功删除
 	 */
-	public Boolean deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
+	 Boolean deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
 	
 	/**
 	 * 将学生加入讨论课小组.
@@ -30,12 +30,14 @@ public interface SeminarGroupService {
 	 * @param userId 学生的id
 	 * @param groupId 要加入讨论课小组的id
 	 * @return BigInteger 若创建成功返回该条记录的id，失败则返回-1
-	 *@exception InfoIllegalException(信息不合法，id格式错误)
-     *@exception GroupNotFoundException(未找到小组)
-     *@exception UserNotFoundException(不存在该学生)
-     *@exception InvalidOperationException（待添加学生已经在小组里了）
+	 *@exception InfoIllegalException (信息不合法，id格式错误)
+     *@exception GroupNotFoundException (未找到小组)
+     *@exception UserNotFoundException (不存在该学生)
+     *@exception InvalidOperationException （待添加学生已经在小组里了）
 	 */
-	public BigInteger insertSeminarGroupMemberById(BigInteger userId,BigInteger groupId);
+	 BigInteger insertSeminarGroupMemberById(BigInteger userId,BigInteger groupId)
+	        throws InfoIllegalException,GroupNotFoundException,UserNotFoundException,
+	        InvalidOperationException;
     
 	/**
 	 * 查询讨论课小组成员.
@@ -46,7 +48,8 @@ public interface SeminarGroupService {
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 * @exception GroupNotFoundException 未找到小组
 	 */
-	public List<User> listSeminarGroupMemberByGroupId(BigInteger groupId);
+	 List<User> listSeminarGroupMemberByGroupId(BigInteger groupId) throws
+	        InfoIllegalException,GroupNotFoundException;
     
 	/**
 	 * 获取某学生所有的讨论课小组.
@@ -56,7 +59,8 @@ public interface SeminarGroupService {
 	 * @return list 讨论课小组列表
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 */
-	public List<SeminarGroup> listSeminarGroupIdByStudentId(BigInteger userId);
+	 List<SeminarGroup> listSeminarGroupIdByStudentId(BigInteger userId) throws
+	        InfoIllegalException;
     
     
     /**
@@ -68,7 +72,8 @@ public interface SeminarGroupService {
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 * @exception GroupNotFoundException 未找到小组
 	 */
-	public BigInteger getSeminarGroupLeaderByGroupId(BigInteger groupId);
+	 BigInteger getSeminarGroupLeaderByGroupId(BigInteger groupId) throws 
+	        InfoIllegalException,GroupNotFoundException;
 	
 	
 	/**
@@ -79,7 +84,8 @@ public interface SeminarGroupService {
      * @exception InfoIllegalException 信息不合法，id格式错误
      * @exception SeminarNotFoundException 未找到讨论课
 	 */
-	public List<SeminarGroup> listSeminarGroupBySeminarId(BigInteger seminarId);
+	 List<SeminarGroup> listSeminarGroupBySeminarId(BigInteger seminarId) throws
+	        InfoIllegalException,SeminarNotFoundException;
 	
 	/**
 	 * 按seminarId删除讨论课小组信息.
@@ -91,28 +97,31 @@ public interface SeminarGroupService {
 	 * @return true删除成功 false删除失败
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 */
-	public Boolean deleteSeminarGroupBySeminarId(BigInteger seminarId);
+	 Boolean deleteSeminarGroupBySeminarId(BigInteger seminarId) throws
+	        InfoIllegalException;
 
 	/**
 	 * 创建讨论课小组.
 	 * ＜p＞在指定讨论课下创建讨论课小组<br>*
 	 * @author YeHongjie
 	 * @param seminarId 讨论课的id
-	 * @param seminarGroupBO 小组信息
+	 * @param seminarGroup 小组信息
 	 * @see SeminarGroupService #insertSeminarGroupMemberByGroupId(BigInteger groupId,SeminarGroupMember SeminarGroupMember) 
 	 * @return BigInteger 若创建成功返回该小组的id，失败则返回-1
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 */
-	public BigInteger insertSeminarGroupBySeminarId(BigInteger seminarId,SeminarGroup seminarGroup);
+	 BigInteger insertSeminarGroupBySeminarId(BigInteger seminarId,
+	            SeminarGroup seminarGroup) throws InfoIllegalException;
     
 	/**
 	 * 创建小组成员信息.
 	 * ＜p＞在指定小组成员表下创建一个新的小组信息<br>*
-	 * @param GroupId 小组的id
+	 * @param groupId 小组的id
 	 * @param seminarGroupMember 小组成员信息
 	 * @return BigInteger 若创建成功返回该小组成员表的id，失败则返回-1
 	 */
-	public BigInteger insertSeminarGroupMemberByGroupId(BigInteger groupId,SeminarGroupMember SeminarGroupMember);
+	 BigInteger insertSeminarGroupMemberByGroupId(BigInteger groupId,
+	            SeminarGroupMember seminarGroupMember);
    
 	
 	/**
@@ -124,7 +133,8 @@ public interface SeminarGroupService {
 	 * @see SeminarGroupService #deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId)
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 */
-	public boolean deleteSeminarGroupByGroupId(BigInteger seminarGroupId);
+	 Boolean deleteSeminarGroupByGroupId(BigInteger seminarGroupId) throws
+	        InfoIllegalException;
     
 	
     /**
@@ -134,10 +144,11 @@ public interface SeminarGroupService {
 	 * @param groupId 小组的id
 	 * @return seminarGroup 讨论课小组对象，若未找到相关小组返回空(null)
 	 * @see SeminarGroupService #listSeminarGroupMemberByGroupId(BigInteger groupId)
-	 * @exception InfoIllegalException(信息不合法，id格式错误)
-	 * @exception GroupNotFoundException(未找到小组)
+	 * @exception InfoIllegalException (信息不合法，id格式错误)
+	 * @exception GroupNotFoundException (未找到小组)
 	 */
-	public SeminarGroup getSeminarGroupByGroupId(BigInteger groupId);
+	 SeminarGroup getSeminarGroupByGroupId(BigInteger groupId) throws 
+	        InfoIllegalException,GroupNotFoundException;
     
     /**
 	 * 获取学生所在讨论课队长.
@@ -150,7 +161,8 @@ public interface SeminarGroupService {
 	 * @see SeminarGroupService #getSeminarGroupLeaderByGroupId(BigInteger groupId)
 	 * @exception InfoIllegalException 信息不合法，id格式错误
 	 */
-	public BigInteger getSeminarGroupLeaderById(BigInteger userId, BigInteger seminarId);
+	 BigInteger getSeminarGroupLeaderById(BigInteger userId, BigInteger seminarId)
+	        throws InfoIllegalException;
 
 	
     /**
@@ -159,34 +171,37 @@ public interface SeminarGroupService {
 	 * @author YeHongjie
 	 * @param seminarId 讨论课的id
 	 * @param classId 班级的id
-	 * @see UserService #List<AttendanceBO> listAttendanceById(BigInteger classId, BigInteger seminarId);
+	 * @see UserService #listAttendanceById(BigInteger classId, BigInteger seminarId);
 	 * @return Boolean 自动分组成功返回true，否则返回false
 	 * @exception InfoIllegalException 信息不合法，id格式错误
-	 * @exception ClassesNotFoundException  未找到班级
+	 * @exception ClassesNotFoundException 未找到班级
      * @exception SeminarNotFoundException 未找到讨论课
 	 */
-	public boolean automaticallyGrouping(BigInteger seminarId,BigInteger classId);
+	 Boolean automaticallyGrouping(BigInteger seminarId,BigInteger classId) throws
+	        InfoIllegalException,ClassesNotFoundException,SeminarNotFoundException;
    
     
      /**
      * 根据讨论课Id及用户id，获得该用户所在的讨论课的小组的信息.
-     * @param BigInteger seminarId (讨论课的id)
-     * @param BigInteger userId（用户的id）
+     * @param seminarId (讨论课的id)
+     * @param userId（用户的id）
      * @return SeminarGroup Group的相关信息
      * @exception InfoIllegalException 信息不合法，id格式错误
      * @exception GroupNotFoundException 未找到小组
      */
-	public SeminarGroup getSeminarGroupById(BigInteger seminarId,BigInteger userId);
+	 SeminarGroup getSeminarGroupById(BigInteger seminarId,BigInteger userId) throws
+	        InfoIllegalException,GroupNotFoundException;
 
 
 	/**
 	 * 根据话题Id获得选择该话题的所有小组的信息.
-	 * @param  topicId(话题的id)
-	 * @return  List<GroupBO> 所有选择该话题的所有group的信息
-	 *@exception nfoIllegalException(信息不合法，id格式错误)
-     *@exception GroupNotFoundException(未找到小组)
+	 * @param  topicId 话题的id
+	 * @return List 所有选择该话题的所有group的信息
+	 * @exception InfoIllegalException 信息不合法，id格式错误
+     * @exception GroupNotFoundException 未找到小组
 	 */
-    public List<SeminarGroup> listGroupByTopicId(BigInteger topicId) ;
+     List<SeminarGroup> listGroupByTopicId(BigInteger topicId) throws
+            InfoIllegalException,GroupNotFoundException;
     
     /**
 	 * 小组按id选择话题.
@@ -198,7 +213,8 @@ public interface SeminarGroupService {
 	 * @exception InfoIllegalException GroupId、TopicId格式错误时抛出
 	 * @exception GroupNotFoundException 该小组不存在时抛出
 	 */
-	public String insertTopicByGroupId(BigInteger groupId, BigInteger topicId);
+	 String insertTopicByGroupId(BigInteger groupId, BigInteger topicId) throws
+            InfoIllegalException,GroupNotFoundException;
 
 	
 	/**
@@ -207,10 +223,11 @@ public interface SeminarGroupService {
 	 * @author heqi
 	 * @param groupId 小组id
 	 * @return true/false 返回取消话题是否成功
-	 * @exception InfoIllegalException GroupId格式错误时抛出
+	 * @exception InfoIllegalException GroupId 格式错误时抛出
 	 * @exception GroupNotFoundException 该小组不存在时抛出
 	 */
-	public Boolean deleteTopicByGroupId(BigInteger groupId);
+	 Boolean deleteTopicByGroupId(BigInteger groupId) throws
+            InfoIllegalException,GroupNotFoundException;;
 	
 	/**
 	 * 成为组长.
@@ -218,12 +235,14 @@ public interface SeminarGroupService {
 	 * @param groupId 小组id
 	 * @param userId  学生id
 	 * @return true/false 返回成为组长是否成功
-     * @exception InfoIllegalException(信息不合法，id格式错误)
-     * @exception GroupNotFoundException(未找到小组)
-     * @exception UserNotFoundException(不存在该学生)
-     * @exception InvalidOperationException（已经有组长了）
+     * @exception InfoIllegalException 信息不合法，id格式错误
+     * @exception GroupNotFoundException 未找到小组
+     * @exception UserNotFoundException 不存在该学生
+     * @exception InvalidOperationException 已经有组长了
 	 */
-	public Boolean assignLeaderById(BigInteger groupId,BigInteger userId);
+	 Boolean assignLeaderById(BigInteger groupId,BigInteger userId) throws
+            InfoIllegalException,UserNotFoundException,GroupNotFoundException,
+            InvalidOperationException;
 	
 	/**
 	 * 组长辞职.
@@ -231,10 +250,9 @@ public interface SeminarGroupService {
 	 * @param groupId 小组id
 	 * @param userId  学生id
 	 * @return true/false 返回组成辞职是否成功
-     * @exception InfoIllegalException(信息不合法，id格式错误)
-     * @exception GroupNotFoundException(未找到小组)
+     * @exception InfoIllegalException (信息不合法，id格式错误)
+     * @exception GroupNotFoundException (未找到小组)
 	 */
-	public Boolean resignLeaderById(BigInteger groupId,BigInteger userId);
-	
-
+	 Boolean resignLeaderById(BigInteger groupId,BigInteger userId) throws
+	        InfoIllegalException,GroupNotFoundException;
 }
