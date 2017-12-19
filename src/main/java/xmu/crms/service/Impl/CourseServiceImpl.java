@@ -1,4 +1,4 @@
-package xmu.crms.serviceImpl;
+package xmu.crms.service.Impl;
 
 public class CourseServiceImpl {
 }

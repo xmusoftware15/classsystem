@@ -9,7 +9,6 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +52,7 @@ public class LoginController {
             while ((line = in.readLine()) != null) {
                 result += line;
             }
+            JSON
             JSONObject json=new JSONObject(result);
             String unionId=json.getString("unionid");
             String header="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9";
