@@ -1,9 +1,7 @@
 package xmu.crms.controller;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,23 +17,11 @@ import xmu.crms.pojo.Course;
 import xmu.crms.pojo.Group;
 import xmu.crms.pojo.Proportions;
 import xmu.crms.pojo.User;
-import xmu.crms.service.ClassService;
-import xmu.crms.service.Impl.ClassServiceImpl;
 
 @RestController
 //@RequestMapping("/api/class")
 @RequestMapping("/class")
 public class ClassController {
-
-	@Autowired
-	private ClassService classServiceImpl;
-
-	@RequestMapping(value="/delete/{classId}" ,method = RequestMethod.POST)
-	public void deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
-	{
-		System.out.println(classId);
-		classServiceImpl.deleteClassSelectionByClassId(new BigInteger(classId));
-	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ArrayList<Class> getCertainClass() {
 		ArrayList<Class> list = new ArrayList<Class>();
@@ -166,5 +152,4 @@ public class ClassController {
 	public void removeClassGroupMember(@RequestBody User user) {
 		
 	}
-
 }

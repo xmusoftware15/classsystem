@@ -20,7 +20,7 @@ public class ClassServiceImpl implements ClassService{
     private ClassDao classDao;
     @Override
     public Boolean deleteClassSelectionByClassId(BigInteger classId) {
-        classDao.deleteClassSelectionByClassId(classId);
+
         return null;
     }
 
