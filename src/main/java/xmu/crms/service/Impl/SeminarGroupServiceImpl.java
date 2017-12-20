@@ -103,4 +103,5 @@ public class SeminarGroupServiceImpl implements SeminarGroupService{
     public void resignLeaderById(BigInteger groupId, BigInteger userId) throws IllegalArgumentException, GroupNotFoundException {
 
     }
+
 }

@@ -8,7 +8,7 @@ import xmu.crms.exception.*;
 
 /**
  * 
- * @author aixing
+ * @author YeXiaona,ZhouZhongJun
  * @version 2.00
  *
  */
@@ -70,11 +70,10 @@ public interface ClassService {
 	 * 
 	 * @author yexiaona
 	 * @param classId 班级ID
-	 * @param newClass 修改后的班级
 	 * @return boolean 班级修改是否成功情况
      * @exception ClassNotFoundException 无此班级Id
 	 */
-	 Boolean updateClassByClassId(BigInteger classId,ClassInfo newClass)
+	 Boolean updateClassByClassId(BigInteger classId)
 	         throws ClassNotFoundException;
 
 	/**
@@ -124,9 +123,9 @@ public interface ClassService {
              UserNotFoundException,ClassNotFoundException;
 
 	/**
-	 * 老师获取该班级签到状态.
+	 * 老师获取该班级签到、分组状态.
 	 * <p>
-	 * 根据讨论课id及班级id，获得该班级的签到状态<br>
+	 * 根据讨论课id及班级id，获得该班级的签到、分组状态<br>
 	 * 
 	 * @author yexiaona
 	 * @param seminarId  讨论课id
@@ -134,7 +133,7 @@ public interface ClassService {
 	 * @see SeminarGroupService #listSeminarGroupBySeminarId(BigInteger seminarId)
 	 * @exception SeminarNotFoundException 无此Id的讨论课
 	 */
-	 ClassInfo getCallStatusById(BigInteger seminarId)
+	 ClassInfo getCallGroupStatusById(BigInteger seminarId) 
 	         throws SeminarNotFoundException;
 
 	/**
