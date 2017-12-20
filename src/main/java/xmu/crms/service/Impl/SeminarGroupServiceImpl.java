@@ -1,5 +1,7 @@
 package xmu.crms.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import xmu.crms.dao.SeminarGroupDao;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
 import xmu.crms.entity.User;
@@ -10,6 +12,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 public class SeminarGroupServiceImpl implements SeminarGroupService{
+    @Autowired
+    private SeminarGroupDao seminarGroupDao;
     @Override
     public void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId) {
 

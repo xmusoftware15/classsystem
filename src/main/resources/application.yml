@@ -1,0 +1,8 @@
+# SPRING PROFILES
+spring:
+    # DATASOURCE
+    datasource:
+        driverClass: com.mysql.jdbc.Driver
+        url: jdbc:mysql://120.77.173.98:3306/xmu8111?useSSL=false
+        username: xmu8111
+        password: 9bdadd17
