@@ -40,7 +40,7 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public Boolean updateClassByClassId(BigInteger classId) throws ClassNotFoundException {
+    public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
         return null;
     }
 
@@ -60,9 +60,10 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public ClassInfo getCallGroupStatusById(BigInteger seminarId) throws SeminarNotFoundException {
+    public ClassInfo getCallStatusById(BigInteger seminarId) throws SeminarNotFoundException {
         return null;
     }
+
 
     @Override
     public BigInteger insertClassById(BigInteger userId, BigInteger courseId) throws UserNotFoundException, CourseNotFoundException {
