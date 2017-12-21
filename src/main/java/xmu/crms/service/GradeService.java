@@ -40,8 +40,7 @@ public interface GradeService {
     /**
      * 获取某学生所有讨论课的所有成绩
      * <p>获取某学生所有讨论课的详细信息（包括成绩）<br>
-     *
-     * @param userId
+     * @param userId 用户id
      * @return list 学生历史讨论课小组列表（包含成绩）
      * @throws IllegalArgumentException userId格式错误
      * @author qinlingyun
@@ -54,9 +53,9 @@ public interface GradeService {
      * 按课程id获取学生该课程所有讨论课
      * <p>通过课程id获取该课程下学生所有讨论课详细信息（包括成绩）<br>
      *
-     * @param userId
-     * @param courseId
-     * @return list 该课程下所有讨论课列表
+     * @param userId 用户id
+     * @param courseId 课程id
+     * @return List 该课程下所有讨论课列表
      * @throws IllegalArgumentException courseId格式错误
      * @see SeminarService#listSeminarByCourseId(BigInteger)
      * @see SeminarGroupService#listSeminarGroupBySeminarId(BigInteger)

@@ -129,7 +129,7 @@ public interface UserService {
 	 * @exception SeminarNotFoundException 未找到讨论课 
 	 */
 	List<User> listPresentStudent(BigInteger seminarId, BigInteger classId) throws
-			IllegalArgumentException;
+			IllegalArgumentException,ClassesNotFoundException,SeminarNotFoundException;
 
 
 	/**

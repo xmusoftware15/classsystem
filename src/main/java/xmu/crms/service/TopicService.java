@@ -100,9 +100,8 @@ public interface TopicService {
     /**
      * 按话题id和小组id获取讨论课小组选题信息
      * <p>按话题id和小组id获取讨论课小组选题信息<br>
-     *
-     * @param topicId
-     * @param groupId
+     * @param topicId 话题id
+     * @param groupId 组id
      * @return seminarGroupTopic 讨论课小组选题信息
      * @see IllegalArgumentException topicId或groupId格式错误
      */

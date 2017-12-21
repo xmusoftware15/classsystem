@@ -88,7 +88,7 @@ public interface SeminarGroupService {
 	 * @author zhouzhongjun
 	 * @param seminarId 课程Id
 	 * @return 讨论课小组列表
-	 * @exception IllegalArgumentExceptionn 信息不合法，id格式错误
+	 * @exception IllegalArgumentException 信息不合法，id格式错误
 	 * @exception SeminarNotFoundException 未找到讨论课
 	 */
 	 List<SeminarGroup> listSeminarGroupBySeminarId(BigInteger seminarId) throws
@@ -122,7 +122,7 @@ public interface SeminarGroupService {
 	/**
 	 * 创建小组成员信息.
 	 * <p>在指定小组成员表下创建一个新的小组信息<br>
-	 * @param GroupId 小组的id
+	 * @param groupId 小组的id
 	 * @param seminarGroupMember 小组成员信息
 	 * @return BigInteger 若创建成功返回该小组成员表的id，失败则返回-1
 	 */
@@ -189,8 +189,8 @@ public interface SeminarGroupService {
 	/**
 	 * 根据讨论课Id及用户id，获得该用户所在的讨论课的小组的信息.
 	 * <p>根据讨论课Id及用户id，获得该用户所在的讨论课的小组的信息<br>
-	 * @param BigInteger seminarId (讨论课的id)
-	 * @param BigInteger userId（用户的id）
+	 * @param seminarId 讨论课的id
+	 * @param userId 用户的id
 	 * @return SeminarGroup Group的相关信息
 	 * @exception IllegalArgumentException 信息不合法，id格式错误
 	 * @exception GroupNotFoundException 未找到小组
