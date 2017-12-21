@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xmu.crms.dao.ClassDao;
 import xmu.crms.entity.ClassInfo;
+import xmu.crms.entity.Course;
 import xmu.crms.entity.User;
 import xmu.crms.exception.CourseNotFoundException;
 import xmu.crms.exception.UserNotFoundException;
@@ -20,19 +21,45 @@ public class ClassDaoImpl implements ClassDao{
 
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
-        System.out.println(teacherName+"in dao");
+        List<ClassInfo> classes;
         User teacher = classMapper.findTeacherIdByteacherName(teacherName);
-        System.out.println(teacher.getId());
-        if(teacher.getId() == null){
+        if(teacher == null){
             throw new UserNotFoundException();
         }else{
-
+            BigInteger teacherId = teacher.getId();
+            Course course = classMapper.findCourseIdByteacherIdAndCourseName(teacherId,courseName);
+            if(course == null){
+                throw new CourseNotFoundException();
+            }else{
+                BigInteger courseId = course.getId();
+                classes = classMapper.findClassByCourseId(courseId);
+            }
         }
-        return null;
+        return classes;
     }
 
     @Override
     public Boolean deleteClassSelectionByClassId(BigInteger classId) {
         return classMapper.deleteClassSelectionByClassId(classId);
+    }
+
+    @Override
+    public List<ClassInfo> findClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
+        List<ClassInfo> classes;
+        classes = classMapper.findClassByCourseId(courseId);
+        if(classes == null) {
+            throw new CourseNotFoundException();
+        }
+        return classes;
+    }
+
+    @Override
+    public ClassInfo findClassByClassId(BigInteger classId) throws ClassNotFoundException {
+        ClassInfo classes;
+        classes = classMapper.findClassByClassId(classId);
+        if(classes == null) {
+            throw new ClassNotFoundException();
+        }
+        return classes;
     }
 }

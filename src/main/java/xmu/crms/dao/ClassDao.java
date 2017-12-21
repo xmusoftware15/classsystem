@@ -14,4 +14,9 @@ public interface ClassDao {
     List<ClassInfo> listClassByName(String courseName, String teacherName) throws
             UserNotFoundException,CourseNotFoundException;
 
+    List<ClassInfo> findClassByCourseId(BigInteger courseId) throws
+            CourseNotFoundException;
+
+    ClassInfo findClassByClassId(BigInteger classId) throws
+            ClassNotFoundException;
 }

@@ -18,6 +18,20 @@
         <result column="email" property="email"/>
     </resultMap>
 
+    <resultMap id="resultClassInfo" type="ClassInfo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="course_id" property="courseId"/>
+        <result column="site" property="site"/>
+        <result column="class_time" property="classTime"/>
+        <result column="description" property="description"/>
+        <result column="report_percentage" property="reportPercentage"/>
+        <result column="presentation_percentage" property="presentationPercentage"/>
+        <result column="five_point_percentage" property="fivePointPercentage"/>
+        <result column="four_point_percentage" property="fourPointPercentage"/>
+        <result column="three_point_percentage" property="threePointPercentage"/>
+    </resultMap>
+
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
         DELETE FROM course_selection
         WHERE class_id=#{classId}
@@ -29,4 +43,42 @@
       AND `name`=#{teacherName}
     </select>
 
+    <select id="findCourseIdByteacherIdAndCourseName" resultType="Course">
+        SELECT id FROM course
+        WHERE teacher_id = #{teacherId}
+        AND `name` = #{courseName}
+    </select>
+
+    <select id="findClassByCourseId" parameterType="BigInteger" resultMap="resultClassInfo">
+      SELECT id,
+              `name`,
+              course_id,
+              description,
+              site,
+              class_time,
+              report_percentage,
+              presentation_percentage,
+              five_point_percentage,
+              four_point_percentage,
+              three_point_percentage
+      FROM class_info
+      WHERE course_id = #{courseId}
+    </select>
+
+
+    <select id="findClassByClassId" parameterType="BigInteger" resultMap="resultClassInfo">
+        SELECT id,
+        `name`,
+        course_id,
+        description,
+        site,
+        class_time,
+        report_percentage,
+        presentation_percentage,
+        five_point_percentage,
+        four_point_percentage,
+        three_point_percentage
+        FROM class_info
+        WHERE id = #{classId}
+    </select>
 </mapper>

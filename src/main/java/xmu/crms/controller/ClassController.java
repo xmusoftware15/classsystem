@@ -2,6 +2,7 @@ package xmu.crms.controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import xmu.crms.entity.ClassInfo;
 import xmu.crms.exception.CourseNotFoundException;
 import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.pojo.Class;
@@ -43,18 +45,43 @@ public class ClassController {
 	}
 
 	@RequestMapping(value="/search/{teacherName}/{courseName}" ,method = RequestMethod.POST)
-	public void search(@PathVariable(name = "teacherName") String teacherName,@PathVariable(name = "courseName") String courseName)
+	public List<ClassInfo> search(@PathVariable(name = "teacherName") String teacherName, @PathVariable(name = "courseName") String courseName)
 	{
-		System.out.println(teacherName+"in controller");
+		List<ClassInfo> classes = new ArrayList<>();
 		try {
-			classService.listClassByName(courseName,teacherName);
+			classes = classService.listClassByName(courseName,teacherName);
 		}catch (UserNotFoundException e){
 
 		}catch (CourseNotFoundException e){
 
 		}
+		return classes;
 	}
 
+	@RequestMapping(value="/searchclassbycourseid/{courseId}" ,method = RequestMethod.POST)
+	public List<ClassInfo> findClassByCourseId(@PathVariable(name = "courseId") BigInteger courseId)
+	{
+		List<ClassInfo> classes = new ArrayList<>();
+		try{
+			classes = classService.listClassByCourseId(courseId);
+		}catch (CourseNotFoundException e){
+
+		}
+		return classes;
+	}
+
+
+	@RequestMapping(value="/searchclassbyclassid/{classId}" ,method = RequestMethod.POST)
+	public ClassInfo findClassByClassId(@PathVariable(name = "classId") BigInteger classId)
+	{
+		ClassInfo classInfo = new ClassInfo();
+		try{
+			classInfo = classService.getClassByClassId(classId);
+		}catch (ClassNotFoundException e){
+
+		}
+		return classInfo;
+	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ArrayList<Class> getCertainClass() {
 		ArrayList<Class> list = new ArrayList<Class>();
