@@ -26,6 +26,7 @@ public class ClassServiceImpl implements ClassService{
 
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
+        System.out.println(teacherName+"in service");
         return classDao.listClassByName(courseName,teacherName);
     }
 

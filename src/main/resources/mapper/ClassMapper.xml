@@ -17,15 +17,16 @@
         <result column="title" property="title"/>
         <result column="email" property="email"/>
     </resultMap>
+
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
         DELETE FROM course_selection
         WHERE class_id=#{classId}
     </delete>
 
-    <select id="findTeacherIdByteacherName" parameterType="BigInteger">
-      SELECT FROM user_info
+    <select id="findTeacherIdByteacherName" parameterType="String" resultType="User">
+      SELECT id FROM user_info
       WHERE type = 1
-      AND name = #{teacherName}
+      AND `name`=#{teacherName}
     </select>
 
 </mapper>
