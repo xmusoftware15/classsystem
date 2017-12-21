@@ -21,6 +21,8 @@ public class ClassDaoImpl implements ClassDao{
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
             User teacher = classMapper.findTeacherIdByteacherName(teacherName);
+            System.out.println(teacherName);
+            System.out.println(teacher.getId());
             if(teacher.getId() == null){
                 throw new UserNotFoundException();
             }else{
