@@ -11,6 +11,7 @@ import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.service.ClassService;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,13 +21,12 @@ public class ClassServiceImpl implements ClassService{
     private ClassDao classDao;
     @Override
     public Boolean deleteClassSelectionByClassId(BigInteger classId) {
-        classDao.deleteClassSelectionByClassId(classId);
-        return null;
+        return classDao.deleteClassSelectionByClassId(classId);
     }
 
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
-        return null;
+        return classDao.listClassByName(courseName,teacherName);
     }
 
     @Override

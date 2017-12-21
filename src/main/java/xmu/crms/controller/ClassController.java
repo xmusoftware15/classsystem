@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.pojo.Class;
 import xmu.crms.pojo.Course;
 import xmu.crms.pojo.Group;
@@ -28,14 +30,31 @@ import xmu.crms.service.Impl.ClassServiceImpl;
 public class ClassController {
 
 	@Autowired
-	private ClassService classServiceImpl;
+	private ClassService classService;
 
 	@RequestMapping(value="/delete/{classId}" ,method = RequestMethod.POST)
-	public void deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
+	public String deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
 	{
-		System.out.println(classId);
-		classServiceImpl.deleteClassSelectionByClassId(new BigInteger(classId));
+		if(classService.deleteClassSelectionByClassId(new BigInteger(classId))){
+			return "chenggong";
+		}else{
+			return "shibai";
+		}
 	}
+
+	@RequestMapping(value="/search/{teacherName}/{courseName}" ,method = RequestMethod.POST)
+	public void search(@PathVariable(name = "teacherName") String teacherName,@PathVariable(name = "courseName") String courseName)
+	{
+		System.out.println(teacherName);
+		try {
+			classService.listClassByName(courseName,teacherName);
+		}catch (UserNotFoundException e){
+
+		}catch (CourseNotFoundException e){
+
+		}
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ArrayList<Class> getCertainClass() {
 		ArrayList<Class> list = new ArrayList<Class>();
