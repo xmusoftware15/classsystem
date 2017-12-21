@@ -3,13 +3,19 @@ package xmu.crms.service;
 import java.math.BigInteger;
 import java.util.List;
 
-import xmu.crms.entity.*;
-import xmu.crms.exception.*;
+import xmu.crms.entity.SeminarGroup;
+import xmu.crms.entity.SeminarGroupMember;
+import xmu.crms.entity.User;
+import xmu.crms.exception.ClassesNotFoundException;
+import xmu.crms.exception.GroupNotFoundException;
+import xmu.crms.exception.InvalidOperationException;
+import xmu.crms.exception.SeminarNotFoundException;
+import xmu.crms.exception.UserNotFoundException;
 
 
 /**
  *
- * @author ModuleStandardGroup/zhouzhongjun
+ * @author zhouzhongjun
  * @version 2.00
  *
  */
@@ -165,6 +171,7 @@ public interface SeminarGroupService {
 
 
 	/**
+	 * 定时器方法.
 	 * 自动分组.
 	 * <p>根据讨论课id和班级id，对签到的学生进行自动分组<br>
 	 * @author YeHongjie
