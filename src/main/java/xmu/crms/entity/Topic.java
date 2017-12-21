@@ -8,7 +8,7 @@ public class Topic {
 	private String description;
 	private Integer groupNumberLimit;
 	private Integer groupStudentLimit;
-	private BigInteger seminarid;
+	private Seminar seminar;
 	
 	public BigInteger getId() {
 		return id;
@@ -40,12 +40,11 @@ public class Topic {
 	public void setGroupStudentLimit(Integer groupStudentLimit) {
 		this.groupStudentLimit = groupStudentLimit;
 	}
-
-	public BigInteger getSeminarid() {
-		return seminarid;
+	public Seminar getSeminar() {
+		return seminar;
 	}
-
-	public void setSeminarid(BigInteger seminarid) {
-		this.seminarid = seminarid;
+	public void setSeminar(Seminar seminar) {
+		this.seminar = seminar;
 	}
+	
 }

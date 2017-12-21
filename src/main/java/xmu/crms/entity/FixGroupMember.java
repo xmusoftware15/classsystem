@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class FixGroupMember {
 	private BigInteger id;
-	private BigInteger fixGroupid;
-	private BigInteger studentid;
+	private FixGroup fixGroup;
+	private User student;
 	
 	public BigInteger getId() {
 		return id;
@@ -13,20 +13,17 @@ public class FixGroupMember {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	public BigInteger getFixGroupid() {
-		return fixGroupid;
+	public FixGroup getFixGroup() {
+		return fixGroup;
+	}
+	public void setFixGroup(FixGroup fixGroup) {
+		this.fixGroup = fixGroup;
+	}
+	public User getStudent() {
+		return student;
+	}
+	public void setStudent(User student) {
+		this.student = student;
 	}
 
-	public BigInteger getStudentid() {
-		return studentid;
-	}
-
-	public void setStudentid(BigInteger studentid) {
-		this.studentid = studentid;
-	}
-
-	public void setFixGroupid(BigInteger fixGroupid) {
-		this.fixGroupid = fixGroupid;
-	}
 }

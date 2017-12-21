@@ -3,13 +3,11 @@
 <mapper namespace="xmu.crms.mapper.SeminarGroupMemberMapper" >
     <resultMap id="BaseResultMap" type="xmu.crms.entity.SeminarGroupMember" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
         <result column="seminar_group_id" property="seminarGroupId" jdbcType="BIGINT" />
         <result column="student_id" property="studentId" jdbcType="BIGINT" />
     </resultMap>
     <sql id="Base_Column_List" >
-        id, gmt_create, gmt_modified, seminar_group_id, student_id
+        id, seminar_group_id, student_id
     </sql>
     <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
         <!--select-->
@@ -17,10 +15,10 @@
         <!--from seminar_group_member-->
         <!--where id = #{id,jdbcType=BIGINT}-->
     <!--</select>-->
-    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >-->
-        <!--delete from seminar_group_member-->
-        <!--where id = #{id,jdbcType=BIGINT}-->
-    <!--</delete>-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from seminar_group_member
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <!--<insert id="insert" parameterType="xmu.crms.entity.SeminarGroupMember" >-->
         <!--insert into seminar_group_member (id, gmt_create, gmt_modified,-->
         <!--seminar_group_id, student_id)-->

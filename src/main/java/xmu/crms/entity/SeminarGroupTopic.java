@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class SeminarGroupTopic {
 	private BigInteger id;
 	private Topic topic;
-	private BigInteger seminarGroupid;
+	private SeminarGroup seminarGroup;
 	private Integer presentationGrade;
 	
 	public BigInteger getId() {
@@ -20,15 +20,12 @@ public class SeminarGroupTopic {
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-
-	public BigInteger getSeminarGroupid() {
-		return seminarGroupid;
+	public SeminarGroup getSeminarGroup() {
+		return seminarGroup;
 	}
-
-	public void setSeminarGroupid(BigInteger seminarGroupid) {
-		this.seminarGroupid = seminarGroupid;
+	public void setSeminarGroup(SeminarGroup seminarGroup) {
+		this.seminarGroup = seminarGroup;
 	}
-
 	public Integer getPresentationGrade() {
 		return presentationGrade;
 	}

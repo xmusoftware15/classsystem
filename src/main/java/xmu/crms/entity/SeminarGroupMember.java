@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class SeminarGroupMember {
 	private BigInteger id;
-	private BigInteger seminarGroupid;
-	private BigInteger studentid;
+	private SeminarGroup seminarGroup;
+	private User student;
 	
 	public BigInteger getId() {
 		return id;
@@ -13,20 +13,17 @@ public class SeminarGroupMember {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	public BigInteger getSeminarGroupid() {
-		return seminarGroupid;
+	public SeminarGroup getSeminarGroup() {
+		return seminarGroup;
+	}
+	public void setSeminarGroup(SeminarGroup seminarGroup) {
+		this.seminarGroup = seminarGroup;
+	}
+	public User getStudent() {
+		return student;
+	}
+	public void setStudent(User student) {
+		this.student = student;
 	}
 
-	public BigInteger getStudentid() {
-		return studentid;
-	}
-
-	public void setStudentid(BigInteger studentid) {
-		this.studentid = studentid;
-	}
-
-	public void setSeminarGroupid(BigInteger seminarGroupid) {
-		this.seminarGroupid = seminarGroupid;
-	}
 }
