@@ -7,7 +7,7 @@ public class Seminar {
 	private BigInteger id;
 	private String name;
 	private String description;
-	private Course course;
+	private BigInteger courseid;
 	private Boolean fixed;
 	private Date startTime;
 	private Date endTime;
@@ -36,12 +36,12 @@ public class Seminar {
 		this.description = description;
 	}
 
-	public Course getCourse() {
-		return course;
+	public BigInteger getCourseid() {
+		return courseid;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setCourseid(BigInteger courseid) {
+		this.courseid = courseid;
 	}
 
 	public Boolean getFixed() {

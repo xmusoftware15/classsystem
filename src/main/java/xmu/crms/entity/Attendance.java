@@ -6,7 +6,7 @@ public class Attendance {
 	private BigInteger id;
 	private User student;
 	private ClassInfo classInfo;
-	private Seminar seminar;
+	private BigInteger seminarid;
 	private Integer attendanceStatus;
 	
 	public BigInteger getId() {
@@ -27,11 +27,11 @@ public class Attendance {
 	public void setClassInfo(ClassInfo classInfo) {
 		this.classInfo = classInfo;
 	}
-	public Seminar getSeminar() {
-		return seminar;
+	public BigInteger getSeminarid() {
+		return seminarid;
 	}
-	public void setSeminar(Seminar seminar) {
-		this.seminar = seminar;
+	public void setSeminarid(BigInteger seminarid) {
+		this.seminarid = seminarid;
 	}
 	public Integer getAttendanceStatus() {
 		return attendanceStatus;

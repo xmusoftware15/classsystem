@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class FixGroup {
 	private BigInteger id;
-	private ClassInfo classInfo;
-	private User leader;
+	private BigInteger classInfoid;
+	private BigInteger leaderid;
 	
 	public BigInteger getId() {
 		return id;
@@ -13,17 +13,12 @@ public class FixGroup {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-	public ClassInfo getClassInfo() {
-		return classInfo;
+
+	public BigInteger getClassInfoid() {
+		return classInfoid;
 	}
-	public void setClassInfo(ClassInfo classInfo) {
-		this.classInfo = classInfo;
+
+	public void setClassInfoid(BigInteger classInfoid) {
+		this.classInfoid = classInfoid;
 	}
-	public User getLeader() {
-		return leader;
-	}
-	public void setLeader(User leader) {
-		this.leader = leader;
-	}
-	
 }
