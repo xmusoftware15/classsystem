@@ -31,10 +31,13 @@ public class ClassController {
 	private ClassService classServiceImpl;
 
 	@RequestMapping(value="/delete/{classId}" ,method = RequestMethod.POST)
-	public void deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
+	public String deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
 	{
-		System.out.println(classId);
-		classServiceImpl.deleteClassSelectionByClassId(new BigInteger(classId));
+		if(classServiceImpl.deleteClassSelectionByClassId(new BigInteger(classId))){
+			return "chenggong";
+		}else{
+			return "shibai";
+		}
 	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ArrayList<Class> getCertainClass() {

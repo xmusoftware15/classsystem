@@ -10,7 +10,7 @@ public class User {
 	private String avatar;
 	private String password;
 	private String name;
-	private School school;
+	private BigInteger schoolId;
 	private Integer gender;
 	private Integer type;
 	private String number;
@@ -60,11 +60,11 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public School getSchool() {
-		return school;
+	public BigInteger getSchoolId() {
+		return schoolId;
 	}
-	public void setSchool(School school) {
-		this.school = school;
+	public void setSchoolId(BigInteger schoolId) {
+		this.schoolId = schoolId;
 	}
 	public Integer getGender() {
 		return gender;
