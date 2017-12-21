@@ -45,7 +45,7 @@ public class ClassController {
 	@RequestMapping(value="/search/{teacherName}/{courseName}" ,method = RequestMethod.POST)
 	public void search(@PathVariable(name = "teacherName") String teacherName,@PathVariable(name = "courseName") String courseName)
 	{
-		System.out.println(teacherName);
+		System.out.println(teacherName+"in controller");
 		try {
 			classService.listClassByName(courseName,teacherName);
 		}catch (UserNotFoundException e){
