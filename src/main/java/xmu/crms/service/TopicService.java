@@ -9,7 +9,7 @@ import xmu.crms.exception.*;
 
 /**
  * @author Yexiaona
- * @version 2.00
+ * @version 2.10
  */
 
 public interface TopicService {

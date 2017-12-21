@@ -13,7 +13,7 @@ import xmu.crms.exception.UserNotFoundException;
 
 /**
  * @author YeHongjie
- * @version 2.00
+ * @version 2.10
  */
 public interface UserService {
 
