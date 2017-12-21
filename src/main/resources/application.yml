@@ -6,3 +6,9 @@ spring:
         url: jdbc:mysql://120.77.173.98:3306/xmu8111?useSSL=false
         username: xmu8111
         password: 9bdadd17
+# mybatis profiles
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: xmu.crms.entity
+  configuration:
+    lazy-loading-enabled: true

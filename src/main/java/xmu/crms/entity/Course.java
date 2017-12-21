@@ -8,7 +8,7 @@ public class Course {
 	private String name;
 	private Date startDate;
 	private Date endDate;
-	private User teacher;
+	private BigInteger teacherId;
 	private String description;
 	private Integer reportPercentage;
 	private Integer presentationPercentage;
@@ -40,12 +40,15 @@ public class Course {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public User getTeacher() {
-		return teacher;
+
+	public BigInteger getTeacherId() {
+		return teacherId;
 	}
-	public void setTeacher(User teacher) {
-		this.teacher = teacher;
+
+	public void setTeacherId(BigInteger teacherId) {
+		this.teacherId = teacherId;
 	}
+
 	public String getDescription() {
 		return description;
 	}

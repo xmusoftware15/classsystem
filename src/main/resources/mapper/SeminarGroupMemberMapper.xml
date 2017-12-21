@@ -15,7 +15,7 @@
         <!--from seminar_group_member-->
         <!--where id = #{id,jdbcType=BIGINT}-->
     <!--</select>-->
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger" >
         delete from seminar_group_member
         where id = #{id,jdbcType=BIGINT}
     </delete>
