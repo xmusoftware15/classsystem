@@ -62,4 +62,11 @@ public class ClassDaoImpl implements ClassDao{
         }
         return classes;
     }
+
+    @Override
+    public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
+
+        return classMapper.updateClassByClassId(classId,newClass);
+
+    }
 }

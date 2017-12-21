@@ -21,7 +21,7 @@
     <resultMap id="resultClassInfo" type="ClassInfo">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="course_id" property="courseId"/>
+        <!--<result column="course_id" property="courseId"/>-->
         <result column="site" property="site"/>
         <result column="class_time" property="classTime"/>
         <result column="description" property="description"/>
@@ -30,6 +30,10 @@
         <result column="five_point_percentage" property="fivePointPercentage"/>
         <result column="four_point_percentage" property="fourPointPercentage"/>
         <result column="three_point_percentage" property="threePointPercentage"/>
+
+        <association property="course" javaType="xmu.crms.entity.Course"
+                     select="xmu.crms.mapper.ClassMapper.findCourseByCourseId" column="course_id">
+        </association>
     </resultMap>
 
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
@@ -41,6 +45,12 @@
       SELECT id FROM user_info
       WHERE type = 1
       AND `name`=#{teacherName}
+    </select>
+
+    <select id="findTeacherIdByteacherName" parameterType="String" resultType="Course">
+        SELECT id FROM user_info
+        WHERE type = 1
+        AND `name`=#{teacherName}
     </select>
 
     <select id="findCourseIdByteacherIdAndCourseName" resultType="Course">
@@ -81,4 +91,20 @@
         FROM class_info
         WHERE id = #{classId}
     </select>
+
+
+    <update id="updateClassByClassId" >
+        UPDATE class_info
+        set `name` = #{name},
+            course_id = #{courseId},
+            description = #{description},
+            site = #{site},
+            class_time = #{classTime},
+            report_percentage = #{reportPercentage},
+            presentation_percentage = #{presentationPercentage},
+            five_point_percentage = #{fivePointPercentage},
+            four_point_percentage = #{fivePointPercentage},
+            three_point_percentage = #{threePointPercentage}
+        WHERE id = #{classId}
+    </update>
 </mapper>

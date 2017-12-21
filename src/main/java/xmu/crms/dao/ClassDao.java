@@ -19,4 +19,7 @@ public interface ClassDao {
 
     ClassInfo findClassByClassId(BigInteger classId) throws
             ClassNotFoundException;
+
+    Boolean updateClassByClassId(BigInteger classId,ClassInfo newClass) throws
+            ClassNotFoundException;
 }

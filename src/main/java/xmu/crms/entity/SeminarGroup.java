@@ -4,13 +4,13 @@ import java.math.BigInteger;
 
 public class SeminarGroup {
 	private BigInteger id;
-	private Seminar seminar;
-	private ClassInfo classInfo;
+	private BigInteger seminarId;
+	private BigInteger classId;
 	private String report;
 	private Integer reportGrade;
 	private Integer presentationGrade;
 	private Integer finalGrade;
-	private User leader;
+	private BigInteger leaderId;
 
 	public BigInteger getId() {
 		return id;
@@ -20,20 +20,28 @@ public class SeminarGroup {
 		this.id = id;
 	}
 
-	public Seminar getSeminar() {
-		return seminar;
+	public BigInteger getSeminarId() {
+		return seminarId;
 	}
 
-	public void setSeminar(Seminar seminar) {
-		this.seminar = seminar;
+	public void setSeminarId(BigInteger seminarId) {
+		this.seminarId = seminarId;
 	}
 
-	public ClassInfo getClassInfo() {
-		return classInfo;
+	public BigInteger getClassId() {
+		return classId;
 	}
 
-	public void setClassInfo(ClassInfo classInfo) {
-		this.classInfo = classInfo;
+	public void setClassId(BigInteger classId) {
+		this.classId = classId;
+	}
+
+	public BigInteger getLeaderId() {
+		return leaderId;
+	}
+
+	public void setLeaderId(BigInteger leaderId) {
+		this.leaderId = leaderId;
 	}
 
 	public String getReport() {
@@ -68,11 +76,5 @@ public class SeminarGroup {
 		this.finalGrade = finalGrade;
 	}
 
-	public User getLeader() {
-		return leader;
-	}
 
-	public void setLeader(User leader) {
-		this.leader = leader;
-	}
 }

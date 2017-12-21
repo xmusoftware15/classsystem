@@ -82,6 +82,43 @@ public class ClassController {
 		}
 		return classInfo;
 	}
+
+//	@RequestMapping(value="/updateClassByClassId" ,method = RequestMethod.POST)
+//	public String updateClassByClassId()
+//	{
+//
+//		ClassInfo newClass = new ClassInfo();
+//		newClass.setName("hxr");
+//		//newClass.setCourseId(new BigInteger("3"));
+//		newClass.setDescription("nope");
+//		newClass.setSite("no where");
+//		newClass.setClassTime("buzhidao");
+//		newClass.setReportPercentage(50);
+//		newClass.setPresentationPercentage(50);
+//		newClass.setFivePointPercentage(20);
+//		newClass.setFourPointPercentage(30);
+//		newClass.setThreePointPercentage(50);
+//		try {
+//			classService.updateClassByClassId(new BigInteger("3"),newClass);
+//		}catch (ClassNotFoundException e){
+//
+//		}
+//
+//
+//	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ArrayList<Class> getCertainClass() {
 		ArrayList<Class> list = new ArrayList<Class>();
@@ -105,7 +142,7 @@ public class ClassController {
 		list.add(class2);
 		return list;
 	}
-	
+
 	@RequestMapping(value="/{classId}" ,method = RequestMethod.GET)
 	public Class getClassById(@PathVariable int classId) {
 		Class class1 = new Class();
@@ -124,19 +161,19 @@ public class ClassController {
 		class1.setProportions(proportions);
 		return class1;
 	}
-	
+
 	@RequestMapping(value="/{classId}" ,method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void updateClassById(@PathVariable int classId,@RequestBody Class class1) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}" ,method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void deleteClassById(@PathVariable int classId) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}/student" ,method = RequestMethod.GET)
 	public ArrayList<User> getStudent(@PathVariable int classId,@RequestParam(value="numBeginWith",required=false) String numBeginWith,@RequestParam(value="nameBeginWith",required=false) String nameBeginWith) {
 		ArrayList<User> list =new ArrayList<User>();
@@ -152,20 +189,20 @@ public class ClassController {
 		list.add(student2);
 		return list;
 	}
-	
+
 	@RequestMapping(value="/{classId}/student" ,method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public String chooseClass(@PathVariable int classId,@RequestBody User user) {
 		String url="/class/34/student/2757";
 		return "{url:"+url+"}";
 	}
-	
+
 	@RequestMapping(value="/{classId}/student/{studentId}" ,method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void cancelClass(@PathVariable int classId,@PathVariable int studentId) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}/classgroup" ,method = RequestMethod.GET)
 	public Group selectMyGroup(@PathVariable int classId) {
 		Group group = new Group();
@@ -188,29 +225,29 @@ public class ClassController {
 		group.setMembers(members);
 		return group;
 	}
-	
+
 	@RequestMapping(value="/{classId}/classgroup/resign" ,method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void classGroupLeaderResign(@RequestBody User user) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}/classgroup/assign" ,method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void classGroupLeaderAssign(@RequestBody User user) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}/classgroup/add" ,method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void addClassGroupMember(@RequestBody User user) {
-		
+
 	}
-	
+
 	@RequestMapping(value="/{classId}/classgroup/remove" ,method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void removeClassGroupMember(@RequestBody User user) {
-		
+
 	}
 
 }

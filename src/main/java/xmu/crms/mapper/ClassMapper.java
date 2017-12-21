@@ -18,16 +18,17 @@ public interface ClassMapper {
 
     Boolean deleteClassSelectionByClassId(BigInteger classId);
 
-    List<ClassInfo> listClassByName(String courseName, String teacherName) throws
-            UserNotFoundException,CourseNotFoundException;
+    User findTeacherIdByteacherName(String teacherName);
 
-    User findTeacherIdByteacherName(String teacherName) throws
-            UserNotFoundException;
-
-    Course findCourseIdByteacherIdAndCourseName(@Param("teacherId") BigInteger teacherId, @Param("courseName") String courseName) throws
-            CourseNotFoundException;
+    Course findCourseIdByteacherIdAndCourseName(@Param("teacherId") BigInteger teacherId, @Param("courseName") String courseName);
 
     List<ClassInfo> findClassByCourseId(BigInteger courseId);
 
     ClassInfo findClassByClassId(BigInteger classId);
+
+    Boolean updateClassByClassId(@Param("classId")BigInteger classId,@Param("newClass")ClassInfo newClass);
+
+    Course findCourseByCourseId(BigInteger courseId);
+
+
 }

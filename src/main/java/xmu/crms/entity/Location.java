@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class Location {
 	private BigInteger id;
-	private ClassInfo classInfo;
-	private Seminar seminar;
+	private BigInteger classId;
+	private BigInteger seminarId;
 	private Double longitude;
 	private Double latitude;
 	private Integer status;
@@ -16,18 +16,23 @@ public class Location {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-	public ClassInfo getClassInfo() {
-		return classInfo;
+
+	public BigInteger getClassId() {
+		return classId;
 	}
-	public void setClassInfo(ClassInfo classInfo) {
-		this.classInfo = classInfo;
+
+	public void setClassId(BigInteger classId) {
+		this.classId = classId;
 	}
-	public Seminar getSeminar() {
-		return seminar;
+
+	public BigInteger getSeminarId() {
+		return seminarId;
 	}
-	public void setSeminar(Seminar seminar) {
-		this.seminar = seminar;
+
+	public void setSeminarId(BigInteger seminarId) {
+		this.seminarId = seminarId;
 	}
+
 	public Double getLongitude() {
 		return longitude;
 	}
