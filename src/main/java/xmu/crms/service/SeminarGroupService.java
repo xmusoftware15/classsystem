@@ -59,7 +59,7 @@ public interface SeminarGroupService {
 
 	/**
 	 * 获取某学生所有的讨论课小组.
-	 * <p>根据学生id获取学生所在的所有讨论课小组的id<br>
+	 * <p>根据学生id获取学生所在的所有讨论课小组的信息<br>
 	 * @author qinlingyun
 	 * @param userId 学生id
 	 * @return list 讨论课小组列表
