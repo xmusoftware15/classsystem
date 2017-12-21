@@ -23,6 +23,14 @@ public class StudentScoreGroup {
 		this.studentid = studentid;
 	}
 
+	public BigInteger getSeminarGroupTopicid() {
+		return seminarGroupTopicid;
+	}
+
+	public void setSeminarGroupTopicid(BigInteger seminarGroupTopicid) {
+		this.seminarGroupTopicid = seminarGroupTopicid;
+	}
+
 	public Integer getGrade() {
 		return grade;
 	}

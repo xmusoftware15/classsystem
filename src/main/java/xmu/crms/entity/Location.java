@@ -21,6 +21,14 @@ public class Location {
 		return classInfoid;
 	}
 
+	public BigInteger getSeminarid() {
+		return seminarid;
+	}
+
+	public void setSeminarid(BigInteger seminarid) {
+		this.seminarid = seminarid;
+	}
+
 	public void setClassInfoid(BigInteger classInfoid) {
 		this.classInfoid = classInfoid;
 	}

@@ -18,6 +18,14 @@ public class FixGroupMember {
 		return fixGroupid;
 	}
 
+	public BigInteger getStudentid() {
+		return studentid;
+	}
+
+	public void setStudentid(BigInteger studentid) {
+		this.studentid = studentid;
+	}
+
 	public void setFixGroupid(BigInteger fixGroupid) {
 		this.fixGroupid = fixGroupid;
 	}

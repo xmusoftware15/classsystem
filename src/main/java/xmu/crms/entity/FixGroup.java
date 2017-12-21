@@ -18,6 +18,14 @@ public class FixGroup {
 		return classInfoid;
 	}
 
+	public BigInteger getLeaderid() {
+		return leaderid;
+	}
+
+	public void setLeaderid(BigInteger leaderid) {
+		this.leaderid = leaderid;
+	}
+
 	public void setClassInfoid(BigInteger classInfoid) {
 		this.classInfoid = classInfoid;
 	}

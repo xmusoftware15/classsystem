@@ -21,6 +21,21 @@ public class SeminarGroup {
 	}
 
 
+	public BigInteger getClassInfoid() {
+		return classInfoid;
+	}
+
+	public BigInteger getLeaderid() {
+		return leaderid;
+	}
+
+	public void setLeaderid(BigInteger leaderid) {
+		this.leaderid = leaderid;
+	}
+
+	public void setClassInfoid(BigInteger classInfoid) {
+		this.classInfoid = classInfoid;
+	}
 
 	public String getReport() {
 		return report;

@@ -18,6 +18,14 @@ public class SeminarGroupMember {
 		return seminarGroupid;
 	}
 
+	public BigInteger getStudentid() {
+		return studentid;
+	}
+
+	public void setStudentid(BigInteger studentid) {
+		this.studentid = studentid;
+	}
+
 	public void setSeminarGroupid(BigInteger seminarGroupid) {
 		this.seminarGroupid = seminarGroupid;
 	}
