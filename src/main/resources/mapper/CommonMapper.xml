@@ -1,0 +1,131 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommonMapper">
+
+    <resultMap id="userResultMap" type="User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="wechatId" column="wechat_id"/>
+        <result property="openid" column="openid"/>
+        <result property="avatar" column="avatar"/>
+        <result property="password" column="password"/>
+        <result property="gender" column="gender"/>
+        <result property="type" column="type"/>
+        <result property="number" column="number"/>
+        <result property="education" column="education"/>
+        <result property="title" column="title"/>
+        <result property="email" column="email"/>
+        <association property="school" column="school_id" select="selectSchool"/>
+    </resultMap>
+
+    <resultMap id="classInfoResultMap" type="ClassInfo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="site" property="site"/>
+        <result column="class_time" property="classTime"/>
+        <result column="description" property="description"/>
+        <result column="report_percentage" property="reportPercentage"/>
+        <result column="presentation_percentage" property="presentationPercentage"/>
+        <result column="five_point_percentage" property="fivePointPercentage"/>
+        <result column="four_point_percentage" property="fourPointPercentage"/>
+        <result column="three_point_percentage" property="threePointPercentage"/>
+        <association property="course" column="course_id" select="selectCourse"/>
+    </resultMap>
+
+    <resultMap id="courseResultMap" type="Course">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="report_percentage" property="reportPercentage"/>
+        <result column="presentation_percentage" property="presentationPercentage"/>
+        <result column="five_point_percentage" property="fivePointPercentage"/>
+        <result column="four_point_percentage" property="fourPointPercentage"/>
+        <result column="three_point_percentage" property="threePointPercentage"/>
+        <result property="startDate" column="start_date" javaType="java.util.Date"/>
+        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <association property="teacher" column="teacher_id" select="selectUser"/>
+    </resultMap>
+    
+    <resultMap id="fixGroupResultMap" type="FixGroup">
+        <id property="id" column="id"/>
+        <association property="classInfo" column="class_id" select="selectClassInfo"/>
+        <association property="leader" column="leader_id" select="selectUser"/>
+    </resultMap>
+
+    <resultMap id="seminarResultMap" type="Seminar">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="fixed" column="is_fixed"/>
+        <result property="startTime" column="start_time" javaType="java.util.Date"/>
+        <result property="endTime" column="end_time" javaType="java.util.Date"/>
+        <association property="course" column="course_id" select="selectCourse"/>
+    </resultMap>
+
+    <resultMap id="seminarGroupResultMap" type="SeminarGroup">
+        <id property="id" column="id"/>
+        <result property="reportGrade" column="report_grade"/>
+        <result property="presentationGrade" column="presentation_grade"/>
+        <result property="finalGrade" column="final_grade"/>
+        <result property="report" column="report"/>
+        <association property="seminar" column="seminar_id" select="selectSeminar"/>
+        <association property="classInfo" column="class_id" select="selectClassInfo"/>
+        <association property="leader" column="leader_id" select="selectUser"/>
+    </resultMap>
+
+    <resultMap id="seminarGroupTopicResultMap" type="SeminarGroupTopic">
+        <id property="id" column="id"/>
+        <result property="presentationGrade" column="presentation_grade"/>
+        <association property="seminarGroup" column="seminar_group_id" select="selectSeminarGroup"/>
+        <association property="topic" column="topic_id" select="selectTopic"/>
+    </resultMap>
+
+    <resultMap id="topicResultMap" type="Topic">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="groupNumberLimit" column="group_number_limit"/>
+        <result property="groupStudentLimit" column="group_student_limit"/>
+        <association property="seminar" column="seminar_id" select="selectSeminar"/>
+    </resultMap>
+
+
+    <select id="selectSchool" resultType="School">
+        SELECT * FROM school WHERE id=#{id}
+    </select>
+
+    <select id="selectUser" resultMap="userResultMap">
+        SELECT * FROM user_info WHERE id=#{id}
+    </select>
+
+    <select id="selectClassInfo" resultMap="classInfoResultMap">
+        SELECT * FROM class_info WHERE id=#{id}
+    </select>
+
+    <select id="selectCourse" resultMap="courseResultMap">
+        SELECT * FROM course WHERE id=#{id}
+    </select>
+
+    <select id="selectFixGroup" resultMap="fixGroupResultMap">
+        SELECT * FROM fix_group WHERE id=#{id}
+    </select>
+
+    <select id="selectSeminar" resultMap="seminarResultMap">
+        SELECT * FROM seminar WHERE id=#{id}
+    </select>
+
+    <select id="selectSeminarGroup" resultMap="seminarGroupResultMap">
+        SELECT * FROM seminar_group WHERE id=#{id}
+    </select>
+
+    <select id="selectSeminarGroupTopic" resultMap="seminarGroupTopicResultMap">
+        SELECT * FROM seminar_group_topic WHERE id=#{id}
+    </select>
+
+    <select id="selectTopic" resultMap="topicResultMap">
+        SELECT * FROM topic WHERE id=#{id}
+    </select>
+
+</mapper>

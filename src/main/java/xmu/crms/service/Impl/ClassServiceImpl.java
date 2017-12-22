@@ -24,28 +24,33 @@ public class ClassServiceImpl implements ClassService{
 
     @Override
     public Boolean deleteClassSelectionByClassId(BigInteger classId) {
-        
-        return null;
+         return classDao.deleteClassSelectionByClassId(classId);
     }
 
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
-        return null;
+        List<ClassInfo> classes = new ArrayList<>();
+        classes= classDao.listClassByName(courseName,teacherName);
+
+        return classes;
     }
 
     @Override
     public List<ClassInfo> listClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
-        return null;
+        List<ClassInfo> classes = new ArrayList<>();
+        classes = classDao.findClassByCourseId(courseId);
+        return classes;
     }
 
     @Override
     public ClassInfo getClassByClassId(BigInteger classId) throws ClassNotFoundException {
-        return null;
+        ClassInfo classInfo = classDao.findClassByClassId(classId);
+        return classInfo;
     }
 
     @Override
     public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
-        return null;
+        return classDao.updateClassByClassId(classId,newClass);
     }
 
     @Override
