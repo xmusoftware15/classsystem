@@ -5,24 +5,25 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import xmu.crms.service.TimerService;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 
 @Component
 public class TimerServiceImpl implements TimerService{
 
-	/**
-	 * 每十分钟检查一次Event实体的状况
-	 * @author qinlingyun
-	 */
 	@Override
-	@Scheduled(fixedRate = 10000)
-	public void scheduled() {
-		
+	public void insertEvent(Date time, String beanName, String methodName, HashMap<BigInteger, String> paramMap) {
+
 	}
 
 	@Override
-	public void insertEvent(Date time, Bean beanName, HashMap<Integer, String> paramMap) {
+	public void updateEvent(Date time, String beanName, String methodName, HashMap<BigInteger, String> paramMap) {
+
+	}
+
+	@Override
+	public void scheduled() {
 
 	}
 }

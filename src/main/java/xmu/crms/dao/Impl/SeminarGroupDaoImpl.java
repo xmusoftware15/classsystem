@@ -24,22 +24,19 @@ seminarGroupMemberMapper.deleteSeminarGroupMemberBySeminarGroupId(seminarGroupId
     }
 
     @Override
-    public void insertSeminarGroupMemberById(BigInteger userId, BigInteger groupId) {
-        seminarGroupMemberMapper.insertSeminarGroupMemberById(userId,groupId);
+    public void insertSeminarGroupMemberById(BigInteger id,BigInteger userId, BigInteger groupId) {
+        seminarGroupMemberMapper.insertSeminarGroupMemberById(id,userId,groupId);
     }
 
     @Override
-    public List<User> listSeminarGroupMemberByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
+    public List<SeminarGroupMember> listSeminarGroupMemberByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
           List<SeminarGroupMember> list=seminarGroupMemberMapper.listSeminarGroupMemberByGroupId(groupId);
           if(list==null){throw new GroupNotFoundException();}
           else{
-          List<User> userList=new ArrayList<User>();
-          for(SeminarGroupMember s:list){
-              User user=s.getStudent();
-              userList.add(user);
+              return list;
           }
-        return userList;}
-    }
+       }
+
 
     @Override
     public List<SeminarGroup> listSeminarGroupIdByStudentId(BigInteger userId) throws IllegalArgumentException {
@@ -79,9 +76,10 @@ seminarGroupMapper.deleteSeminarGroupBySeminarId(seminarId);
     }
 
     @Override
-    public void insertSeminarGroupMemberByGroupId( BigInteger groupId,SeminarGroupMember seminarGroupMember) {
+    public BigInteger insertSeminarGroupMemberByGroupId( BigInteger groupId,SeminarGroupMember seminarGroupMember) {
 
         seminarGroupMemberMapper.insertSeminarGroupMemberByGroupId(groupId,seminarGroupMember);
+        return seminarGroupMember.getId();
     }
 
     @Override

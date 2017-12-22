@@ -3,11 +3,8 @@ package xmu.crms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import xmu.crms.entity.ClassInfo;
-import xmu.crms.entity.Course;
-import xmu.crms.entity.User;
-import xmu.crms.exception.CourseNotFoundException;
-import xmu.crms.exception.UserNotFoundException;
+import xmu.crms.entity.*;
+
 
 import java.math.BigInteger;
 import java.util.List;
@@ -38,5 +35,11 @@ public interface ClassMapper {
 
     Course findCourseByCourseId(BigInteger courseId);
 
+    BigInteger findCourseIdByUserIdAndClassId(@Param("userId") BigInteger userId, @Param("classId") BigInteger classId);
+
     Boolean deleteCourseSelectionById(@Param("userId")BigInteger userId, @Param("classId")BigInteger classId);
+
+    Location getCallStatusById(@Param("classId") BigInteger classId, @Param("seminarId") BigInteger seminarId);
+
+    Seminar findSeminarById(BigInteger seminarId);
 }

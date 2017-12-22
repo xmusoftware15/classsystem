@@ -1,7 +1,10 @@
 package xmu.crms.dao;
 
 import xmu.crms.entity.ClassInfo;
+import xmu.crms.entity.Location;
+import xmu.crms.exception.ClassesNotFoundException;
 import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.exception.SeminarNotFoundException;
 import xmu.crms.exception.UserNotFoundException;
 
 import java.math.BigInteger;
@@ -18,21 +21,25 @@ public interface ClassDao {
             CourseNotFoundException;
 
     ClassInfo findClassByClassId(BigInteger classId) throws
-            ClassNotFoundException;
+            ClassesNotFoundException;
 
     Boolean updateClassByClassId(BigInteger classId,ClassInfo newClass) throws
-            ClassNotFoundException;
+            ClassesNotFoundException;
 
     Boolean deleteClassByClassId(BigInteger classId)
-            throws ClassNotFoundException;
+            throws ClassesNotFoundException;
 
     Boolean insertCourseSelectionById(BigInteger userId, BigInteger classId) throws
-            UserNotFoundException,ClassNotFoundException;
+            UserNotFoundException,ClassesNotFoundException;
 
     Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws
-            UserNotFoundException,ClassNotFoundException;
+            UserNotFoundException,ClassesNotFoundException;
 
     BigInteger insertClassById(BigInteger userId, BigInteger courseId) throws
             UserNotFoundException,CourseNotFoundException;
 
+    BigInteger findCourseIdByUserIdAndClassId(BigInteger userId,BigInteger classId);
+
+
+    Location getCallStatusById(BigInteger classId, BigInteger seminarId) throws SeminarNotFoundException;
 }

@@ -19,6 +19,14 @@ import xmu.crms.exception.UserNotFoundException;
  */
 public interface SeminarGroupService {
 
+    /**
+     * 按seminarGroupId删除SeminarGroupMember信息.
+     * <p>按seminarGroupId删除SeminarGroupMember信息<br>
+     *
+     * @param seminarGroupId 讨论课小组Id
+     * @author zhouzhongjun
+     */
+    void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
 
 	/**
 	 * 按seminarGroupId删除SeminarGroupMember信息.
@@ -101,9 +109,10 @@ public interface SeminarGroupService {
 	 * @see SeminarGroupService #listSeminarGroupBySeminarId(BigInteger seminarId)
 	 * @see SeminarGroupService #deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId)
 	 * @exception IllegalArgumentException 信息不合法，id格式错误
+	 * @exception SeminarNotFoundException 未找到讨论课
 	 */
 	 void deleteSeminarGroupBySeminarId(BigInteger seminarId) throws
-			IllegalArgumentException;
+			IllegalArgumentException,SeminarNotFoundException;
 
 	/**
 	 * 创建讨论课小组.
@@ -151,7 +160,7 @@ public interface SeminarGroupService {
 	 * @exception IllegalArgumentException (信息不合法，id格式错误)
 	 * @exception GroupNotFoundException (未找到小组)
 	 */
-	 SeminarGroup getSeminarGroupByGroupId(BigInteger groupId) throws
+	 List<SeminarGroupMember> getSeminarGroupByGroupId(BigInteger groupId) throws
 			IllegalArgumentException,GroupNotFoundException;
 
 	/**
@@ -164,9 +173,10 @@ public interface SeminarGroupService {
 	 * @see SeminarGroupService #getSeminarGroupById(BigInteger userId, BigInteger seminarId)
 	 * @see SeminarGroupService #getSeminarGroupLeaderByGroupId(BigInteger groupId)
 	 * @exception IllegalArgumentException 信息不合法，id格式错误
+	 * @exception GroupNotFoundException 未找到小组
 	 */
 	 BigInteger getSeminarGroupLeaderById(BigInteger userId, BigInteger seminarId)
-			throws IllegalArgumentException;
+			throws IllegalArgumentException,GroupNotFoundException;
 
 
 	/**
@@ -247,4 +257,5 @@ public interface SeminarGroupService {
 	 */
 	 void resignLeaderById(BigInteger groupId,BigInteger userId) throws
 			IllegalArgumentException,GroupNotFoundException;
+
 }

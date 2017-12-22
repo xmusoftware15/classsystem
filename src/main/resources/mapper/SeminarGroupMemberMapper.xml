@@ -49,11 +49,11 @@
         delete from seminar_group_member
         where seminar_group_id = #{seminarGroupId,jdbcType=BIGINT}
     </delete>
-    <insert id="insertSeminarGroupMemberById" >
+    <insert id="insertSeminarGroupMemberById" useGeneratedKeys="true" keyProperty="id">
         insert into seminar_group_member ( seminar_group_id, student_id)
         values ( #{groupId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT})
     </insert>
-    <insert id="insertSeminarGroupMemberByGroupId" >
+    <insert id="insertSeminarGroupMemberByGroupId" useGeneratedKeys="true" keyProperty="seminarGroupMember.id">
         insert into seminar_group_member
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
