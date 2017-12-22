@@ -31,7 +31,7 @@ public interface SeminarGroupDao {
      *@exception UserNotFoundException (不存在该学生)
      *@exception InvalidOperationException （待添加学生已经在小组里了）
      */
-    void insertSeminarGroupMemberById(BigInteger userId,BigInteger groupId)
+    void insertSeminarGroupMemberById(BigInteger id,BigInteger userId,BigInteger groupId)
             throws IllegalArgumentException,GroupNotFoundException,UserNotFoundException,
             InvalidOperationException;
 
@@ -44,7 +44,7 @@ public interface SeminarGroupDao {
      * @exception IllegalArgumentException 信息不合法，id格式错误
      * @exception GroupNotFoundException 未找到小组
      */
-    List<User> listSeminarGroupMemberByGroupId(BigInteger groupId) throws
+    List<SeminarGroupMember> listSeminarGroupMemberByGroupId(BigInteger groupId) throws
             IllegalArgumentException,GroupNotFoundException;
 
     /**
@@ -113,7 +113,7 @@ public interface SeminarGroupDao {
      * @param seminarGroupMember 小组成员信息
      * @return BigInteger 若创建成功返回该小组成员表的id，失败则返回-1
      */
-    void insertSeminarGroupMemberByGroupId(BigInteger groupId,SeminarGroupMember seminarGroupMember);
+    BigInteger insertSeminarGroupMemberByGroupId(BigInteger groupId,SeminarGroupMember seminarGroupMember);
 
 
     /**
