@@ -19,6 +19,14 @@ import xmu.crms.exception.UserNotFoundException;
  */
 public interface SeminarGroupService {
 
+    /**
+     * 按seminarGroupId删除SeminarGroupMember信息.
+     * <p>按seminarGroupId删除SeminarGroupMember信息<br>
+     *
+     * @param seminarGroupId 讨论课小组Id
+     * @author zhouzhongjun
+     */
+    void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
 
 	/**
 	 * 按seminarGroupId删除SeminarGroupMember信息.
@@ -249,4 +257,5 @@ public interface SeminarGroupService {
 	 */
 	 void resignLeaderById(BigInteger groupId,BigInteger userId) throws
 			IllegalArgumentException,GroupNotFoundException;
+
 }

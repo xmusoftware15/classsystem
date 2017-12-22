@@ -3,10 +3,10 @@ package xmu.crms.dao.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xmu.crms.dao.ClassDao;
-import xmu.crms.entity.ClassInfo;
-import xmu.crms.entity.Course;
-import xmu.crms.entity.User;
+import xmu.crms.entity.*;
+import xmu.crms.exception.ClassesNotFoundException;
 import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.exception.SeminarNotFoundException;
 import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.mapper.ClassMapper;
 import xmu.crms.pojo.Class;
@@ -55,64 +55,65 @@ public class ClassDaoImpl implements ClassDao{
     }
 
     @Override
-    public ClassInfo findClassByClassId(BigInteger classId) throws ClassNotFoundException {
+    public ClassInfo findClassByClassId(BigInteger classId) throws ClassesNotFoundException {
         ClassInfo classes;
         classes = classMapper.findClassByClassId(classId);
         if(classes == null) {
-            throw new ClassNotFoundException();
+            throw new ClassesNotFoundException();
         }
         return classes;
     }
 
     @Override
-    public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
+    public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassesNotFoundException {
+        ClassInfo classInfo = classMapper.findClassByClassId(classId);
+        if(classInfo == null){
+            throw new ClassesNotFoundException();
+        }
         newClass.setId(classId);
         return classMapper.updateClassByClassId(newClass);
 
     }
 
     @Override
-    public Boolean deleteClassByClassId(BigInteger classId) throws ClassNotFoundException {
+    public Boolean deleteClassByClassId(BigInteger classId) throws ClassesNotFoundException {
         ClassInfo classInfo = classMapper.findClassByClassId(classId);
         if(classInfo == null){
-            throw new ClassNotFoundException();
+            throw new ClassesNotFoundException();
         }else{
-            classMapper.deleteClassByClassId(classId);
+            return classMapper.deleteClassByClassId(classId);
         }
-        return null;
     }
 
     @Override
-    public Boolean insertCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
+    public Boolean insertCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassesNotFoundException {
         User student = classMapper.findStudentdByStudentId(userId);
         if(student == null){
             throw new UserNotFoundException();
         }else {
             ClassInfo classInfo = classMapper.findClassByClassId(classId);
             if(classInfo == null){
-                throw new ClassNotFoundException();
+                throw new ClassesNotFoundException();
             }else{
-                classMapper.insertCourseSelectionById(userId,classId);
+                return classMapper.insertCourseSelectionById(userId,classId);
             }
         }
-        return null;
     }
 
     @Override
-    public Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
+    public Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassesNotFoundException {
         User student = classMapper.findStudentdByStudentId(userId);
         if(student == null){
             throw new UserNotFoundException();
         }else {
             ClassInfo classInfo = classMapper.findClassByClassId(classId);
             if(classInfo == null){
-                throw new ClassNotFoundException();
+                throw new ClassesNotFoundException();
             }else{
-                classMapper.deleteCourseSelectionById(userId,classId);
+                return classMapper.deleteCourseSelectionById(userId,classId);
             }
         }
 
-        return null;
     }
 
     @Override
@@ -127,5 +128,20 @@ public class ClassDaoImpl implements ClassDao{
             }
         }
         return null;
+    }
+
+    @Override
+    public BigInteger findCourseIdByUserIdAndClassId(BigInteger userId, BigInteger classId) {
+        return classMapper.findCourseIdByUserIdAndClassId(userId,classId);
+    }
+
+    @Override
+    public Location getCallStatusById(BigInteger classId, BigInteger seminarId) throws SeminarNotFoundException {
+        Seminar seminar = classMapper.findSeminarById(seminarId);
+        if(seminar == null){
+            throw new SeminarNotFoundException();
+        }else{
+            return classMapper.getCallStatusById(classId,seminarId);
+        }
     }
 }

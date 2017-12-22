@@ -18,6 +18,18 @@
     </resultMap>
 
 
+    <resultMap id="resultLocation" type="Location">
+        <result column="id" property="id"/>
+        <result column="longitude" property="id"/>
+        <result column="latitude" property="id"/>
+        <result column="status" property="id"/>
+        <association property="course" column="course_id" javaType="Course"
+                     select="CommonMapper.selectCourse"/>
+        <association property="seminar" column="seminar_id" javaType="Seminar"
+                     select="CommonMapper.selectSeminar"/>
+    </resultMap>
+
+
 
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
         DELETE FROM course_selection
@@ -116,4 +128,26 @@
         AND id = #{teacherId}
     </select>
 
+    <select id="findCourseIdByUserIdAndClassId" parameterType="BigInteger" resultType="BigInteger">
+        SELECT id FROM course_selection
+        WHERE class_id = #{classId}
+        AND student_id = #{userId}
+    </select>
+
+    <select id="findSeminarById" parameterType="BigInteger" resultType="Seminar">
+        SELECT id FROM seminar
+        WHERE id = #{seminarId}
+    </select>
+
+    <select id="getCallStatusById" parameterType="BigInteger" resultMap="resultLocation">
+        SELECT id,
+                class_id,
+                seminar_id,
+                longitude,
+                latitude,
+                status
+        FROM location
+        WHERE seminar_id = #{seminarId}
+        AND class_id = #{classId}
+    </select>
 </mapper>
