@@ -1,67 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="xmu.crms.mapper.SeminarGroupMemberMapper" >
-    <resultMap id="BaseResultMap" type="xmu.crms.entity.SeminarGroupMember" >
+    <resultMap id="SeminarGroupMember" type="xmu.crms.entity.SeminarGroupMember" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="seminar_group_id" property="seminarGroupId" jdbcType="BIGINT" />
-        <result column="student_id" property="studentId" jdbcType="BIGINT" />
+        <association property="seminarGroup" javaType="xmu.crms.entity.SeminarGroup"
+                     select="xmu.crms.mapper.CommonMapper.selectSeminarGroup" column="seminar_group_id">
+        </association>
+        <association property="student" javaType="xmu.crms.entity.User"
+                     select="xmu.crms.mapper.CommonMapper.selectUser" column="student_id">
+        </association>
     </resultMap>
-    <sql id="Base_Column_List" >
+    <!--<resultMap id="User" type="xmu.crms.entity.User" >-->
+        <!--<id column="id" property="id" jdbcType="BIGINT" />-->
+        <!--<result column="phone" property="phone" jdbcType="CHAR" />-->
+        <!--<result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />-->
+        <!--<result column="openid" property="openid" jdbcType="VARCHAR" />-->
+        <!--<result column="avatar" property="avatar" jdbcType="VARCHAR" />-->
+        <!--<result column="password" property="password" jdbcType="VARCHAR" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="school_id" property="schoolId" jdbcType="BIGINT" />-->
+        <!--<result column="gender" property="gender" jdbcType="BIT" />-->
+        <!--<result column="type" property="type" jdbcType="BIT" />-->
+        <!--<result column="number" property="number" jdbcType="VARCHAR" />-->
+        <!--<result column="education" property="education" jdbcType="BIT" />-->
+        <!--<result column="title" property="title" jdbcType="VARCHAR" />-->
+        <!--<result column="email" property="email" jdbcType="VARCHAR" />-->
+    <!--</resultMap>-->
+    <sql id="SeminarGroupMember_Column_List" >
         id, seminar_group_id, student_id
     </sql>
-    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
-        <!--select-->
-        <!--<include refid="Base_Column_List" />-->
-        <!--from seminar_group_member-->
-        <!--where id = #{id,jdbcType=BIGINT}-->
-    <!--</select>-->
-    <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger" >
+    <!--<sql id="User_Column_List" >-->
+        <!--id,  phone, wechat_id, openid, avatar, password, `name`, school_id,-->
+    <!--gender, `type`, `number`, education, title, email-->
+    <!--</sql>-->
+    <select id="listSeminarGroupMemberByGroupId" resultMap="SeminarGroupMember" parameterType="java.math.BigInteger" >
+        select
+        <include refid="SeminarGroupMember_Column_List" />
+        from seminar_group_member
+        where seminar_group_id = #{groupId,jdbcType=BIGINT}
+    </select>
+    <select id="listSeminarGroupIdByStudentId" resultMap="SeminarGroupMember" parameterType="java.math.BigInteger" >
+        select
+        <include refid="SeminarGroupMember_Column_List" />
+        from seminar_group_member
+        where student_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteSeminarGroupMemberBySeminarGroupId" parameterType="java.math.BigInteger" >
         delete from seminar_group_member
-        where id = #{id,jdbcType=BIGINT}
+        where seminar_group_id = #{seminarGroupId,jdbcType=BIGINT}
     </delete>
-    <!--<insert id="insert" parameterType="xmu.crms.entity.SeminarGroupMember" >-->
-        <!--insert into seminar_group_member (id, gmt_create, gmt_modified,-->
-        <!--seminar_group_id, student_id)-->
-        <!--values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},-->
-        <!--#{seminarGroupId,jdbcType=BIGINT}, #{studentId,jdbcType=BIGINT})-->
-    <!--</insert>-->
-    <!--<insert id="insertSelective" parameterType="xmu.crms.entity.SeminarGroupMember" >-->
-        <!--insert into seminar_group_member-->
-        <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
-            <!--<if test="id != null" >-->
-                <!--id,-->
-            <!--</if>-->
-            <!--<if test="gmtCreate != null" >-->
-                <!--gmt_create,-->
-            <!--</if>-->
-            <!--<if test="gmtModified != null" >-->
-                <!--gmt_modified,-->
-            <!--</if>-->
-            <!--<if test="seminarGroupId != null" >-->
-                <!--seminar_group_id,-->
-            <!--</if>-->
-            <!--<if test="studentId != null" >-->
-                <!--student_id,-->
-            <!--</if>-->
-        <!--</trim>-->
-        <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
-            <!--<if test="id != null" >-->
-                <!--#{id,jdbcType=BIGINT},-->
-            <!--</if>-->
-            <!--<if test="gmtCreate != null" >-->
-                <!--#{gmtCreate,jdbcType=TIMESTAMP},-->
-            <!--</if>-->
-            <!--<if test="gmtModified != null" >-->
-                <!--#{gmtModified,jdbcType=TIMESTAMP},-->
-            <!--</if>-->
-            <!--<if test="seminarGroupId != null" >-->
-                <!--#{seminarGroupId,jdbcType=BIGINT},-->
-            <!--</if>-->
-            <!--<if test="studentId != null" >-->
-                <!--#{studentId,jdbcType=BIGINT},-->
-            <!--</if>-->
-        <!--</trim>-->
-    <!--</insert>-->
+    <insert id="insertSeminarGroupMemberById" >
+        insert into seminar_group_member ( seminar_group_id, student_id)
+        values ( #{groupId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSeminarGroupMemberByGroupId" >
+        insert into seminar_group_member
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="seminarGroupId != null" >
+                seminar_group_id,
+            </if>
+            <if test="studentId != null" >
+                student_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="seminarGroupId != null" >
+                #{groupId,jdbcType=BIGINT},
+            </if>
+            <if test="studentId != null" >
+                #{seminarGroupMember.student.id,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
     <!--<update id="updateByPrimaryKeySelective" parameterType="xmu.crms.entity.SeminarGroupMember" >-->
         <!--update seminar_group_member-->
         <!--<set >-->

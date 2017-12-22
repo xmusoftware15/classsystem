@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xmu.crms.mapper.SeminarGroupMapper" >
+    <resultMap id="BaseResultMap" type="xmu.crms.entity.SeminarGroup" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="report_garde" property="reportGarde" jdbcType="INTEGER" />
+        <result column="presentation_grade" property="presentationGrade" jdbcType="INTEGER" />
+        <result column="final_grade" property="finalGrade" jdbcType="INTEGER" />
+        <result column="report" property="report" jdbcType="VARCHAR" />
+        <association property="seminar" javaType="xmu.crms.entity.Seminar"
+                     select="xmu.crms.mapper.CommonMapper.selectSeminar" column="seminar_id">
+        </association>
+        <association property="classInfo" javaType="xmu.crms.entity.ClassInfo"
+                     select="xmu.crms.mapper.CommonMapper.selectClassInfo" column="class_id">
+        </association>
+        <association property="leader" javaType="xmu.crms.entity.User"
+                     select="xmu.crms.mapper.CommonMapper.selectUser" column="leader_id">
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, seminar_id, report_garde, presentation_grade, final_grade,
+        report, class_id, leader_id
+    </sql>
+    <select id="selectSeminarGroupByGroupId" resultMap="BaseResultMap" parameterType="java.math.BigInteger" >
+        select
+        <include refid="Base_Column_List" />
+        from seminar_group
+        where id = #{seminarGroupId,jdbcType=BIGINT}
+    </select>
+    <select id="getSeminarGroupLeaderByGroupId" resultMap="java.math.BigInteger" parameterType="java.math.BigInteger" >
+        select leader_id
+        from seminar_group
+        where id = #{groupId,jdbcType=BIGINT}
+    </select>
+    <select id="listSeminarGroupBySeminarId" resultMap="BaseResultMap" parameterType="java.math.BigInteger" >
+        select
+        <include refid="Base_Column_List" />
+        from seminar_group
+        where seminar_id = #{seminarId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteSeminarGroupBySeminarId" parameterType="java.math.BigInteger" >
+        delete from seminar_group
+        where seminar_id = #{seminarId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteSeminarGroupByGroupId" parameterType="java.math.BigInteger" >
+        delete from seminar_group
+        where id = #{seminarGroupId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSeminarGroupBySeminarId" useGeneratedKeys="true" keyProperty="seminarGroup.id">
+        insert into seminar_group (id,seminar_id, report_garde, presentation_grade,
+        final_grade, report, class_id,
+        leader_id)
+        values (#{seminarGroup.id,jdbcType=BIGINT},#{seminarId,jdbcType=BIGINT}, #{seminarGroup.reportGarde,jdbcType=INTEGER}, #{seminarGroup.presentationGrade,jdbcType=INTEGER},
+        #{seminarGroup.finalGrade,jdbcType=INTEGER}, #{seminarGroup.report,jdbcType=VARCHAR}, #{seminarGroup.classInfo.Id,jdbcType=BIGINT},
+        #{seminarGroup.leader.id,jdbcType=BIGINT})
+    </insert>
+    <!--<insert id="insertSelective" parameterType="xmu.crms.entity.SeminarGroup" >-->
+        <!--insert into seminar_group-->
+        <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+            <!--<if test="id != null" >-->
+                <!--id,-->
+            <!--</if>-->
+            <!--<if test="gmtCreate != null" >-->
+                <!--gmt_create,-->
+            <!--</if>-->
+            <!--<if test="gmtModified != null" >-->
+                <!--gmt_modified,-->
+            <!--</if>-->
+            <!--<if test="seminarId != null" >-->
+                <!--seminar_id,-->
+            <!--</if>-->
+            <!--<if test="reportGarde != null" >-->
+                <!--report_garde,-->
+            <!--</if>-->
+            <!--<if test="presentationGrade != null" >-->
+                <!--presentation_grade,-->
+            <!--</if>-->
+            <!--<if test="finalGrade != null" >-->
+                <!--final_grade,-->
+            <!--</if>-->
+            <!--<if test="report != null" >-->
+                <!--report,-->
+            <!--</if>-->
+            <!--<if test="classId != null" >-->
+                <!--class_id,-->
+            <!--</if>-->
+            <!--<if test="leaderId != null" >-->
+                <!--leader_id,-->
+            <!--</if>-->
+        <!--</trim>-->
+        <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+            <!--<if test="id != null" >-->
+                <!--#{id,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="gmtCreate != null" >-->
+                <!--#{gmtCreate,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="gmtModified != null" >-->
+                <!--#{gmtModified,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="seminarId != null" >-->
+                <!--#{seminarId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="reportGarde != null" >-->
+                <!--#{reportGarde,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="presentationGrade != null" >-->
+                <!--#{presentationGrade,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="finalGrade != null" >-->
+                <!--#{finalGrade,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="report != null" >-->
+                <!--#{report,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="classId != null" >-->
+                <!--#{classId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="leaderId != null" >-->
+                <!--#{leaderId,jdbcType=BIGINT},-->
+            <!--</if>-->
+        <!--</trim>-->
+    <!--</insert>-->
+    <!--<update id="updateByPrimaryKeySelective" parameterType="xmu.crms.entity.SeminarGroup" >-->
+        <!--update seminar_group-->
+        <!--<set >-->
+            <!--<if test="gmtCreate != null" >-->
+                <!--gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="gmtModified != null" >-->
+                <!--gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="seminarId != null" >-->
+                <!--seminar_id = #{seminarId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="reportGarde != null" >-->
+                <!--report_garde = #{reportGarde,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="presentationGrade != null" >-->
+                <!--presentation_grade = #{presentationGrade,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="finalGrade != null" >-->
+                <!--final_grade = #{finalGrade,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="report != null" >-->
+                <!--report = #{report,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="classId != null" >-->
+                <!--class_id = #{classId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="leaderId != null" >-->
+                <!--leader_id = #{leaderId,jdbcType=BIGINT},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</update>-->
+    <!--<update id="updateByPrimaryKey" parameterType="xmu.crms.entity.SeminarGroup" >-->
+        <!--update seminar_group-->
+        <!--set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},-->
+        <!--gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},-->
+        <!--seminar_id = #{seminarId,jdbcType=BIGINT},-->
+        <!--report_garde = #{reportGarde,jdbcType=INTEGER},-->
+        <!--presentation_grade = #{presentationGrade,jdbcType=INTEGER},-->
+        <!--final_grade = #{finalGrade,jdbcType=INTEGER},-->
+        <!--report = #{report,jdbcType=VARCHAR},-->
+        <!--class_id = #{classId,jdbcType=BIGINT},-->
+        <!--leader_id = #{leaderId,jdbcType=BIGINT}-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</update>-->
+</mapper>

@@ -1,4 +1,4 @@
-package xmu.crms.service;
+﻿package xmu.crms.service;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -14,12 +14,11 @@ import xmu.crms.exception.UserNotFoundException;
 
 
 /**
- *
  * @author zhouzhongjun
  * @version 2.10
- *
  */
 public interface SeminarGroupService {
+
 
 	/**
 	 * 按seminarGroupId删除SeminarGroupMember信息.
