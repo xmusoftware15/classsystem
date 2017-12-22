@@ -6,13 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import xmu.crms.entity.ClassInfo;
@@ -34,6 +28,16 @@ public class ClassController {
 	@Autowired
 	private ClassService classService;
 
+	@RequestMapping(value="/test" ,method = RequestMethod.POST)
+	public void test()
+	{
+		try {
+			classService.getClassByClassId(new BigInteger("1"));
+		}catch (ClassNotFoundException e){
+
+		}
+	}
+
 	@RequestMapping(value="/delete/{classId}" ,method = RequestMethod.POST)
 	public String deleteClassSelectionByClassId(@PathVariable(name = "classId") String classId)
 	{
@@ -47,6 +51,9 @@ public class ClassController {
 	@RequestMapping(value="/search/{teacherName}/{courseName}" ,method = RequestMethod.POST)
 	public List<ClassInfo> search(@PathVariable(name = "teacherName") String teacherName, @PathVariable(name = "courseName") String courseName)
 	{
+		System.out.println(teacherName);
+		teacherName = "邱明";
+		courseName = "课程1";
 		List<ClassInfo> classes = new ArrayList<>();
 		try {
 			classes = classService.listClassByName(courseName,teacherName);
@@ -109,40 +116,40 @@ public class ClassController {
 		return classInfo;
 	}
 
-	@RequestMapping(value="/updateClassByClassId" ,method = RequestMethod.POST)
-	public void updateClassByClassId()
-	{
-
-		ClassInfo newClass = new ClassInfo();
-		BigInteger b = new BigInteger("3");
-		newClass.setName("hx");
-		newClass.setCourseId(new BigInteger("3"));
-		newClass.setDescription("nope");
-		newClass.setSite("no where");
-		newClass.setClassTime("buzhidao");
-		newClass.setReportPercentage(50);
-		newClass.setPresentationPercentage(50);
-		newClass.setFivePointPercentage(20);
-		newClass.setFourPointPercentage(30);
-		newClass.setThreePointPercentage(50);
-		try {
-			 classService.updateClassByClassId(b,newClass);
-		}catch (ClassNotFoundException e){
-
-		}
-
-	}
-
-	@RequestMapping(value="/deleteclass/{classId}" ,method = RequestMethod.POST)
-	public String deleteClassByClassId(@PathVariable(name = "classId") String classId)
-	{
-		try {
-			classService.deleteClassByClassId(new BigInteger(classId));
-		}catch (ClassNotFoundException e){
-
-		}
-		return null;
-	}
+//	@RequestMapping(value="/updateClassByClassId" ,method = RequestMethod.POST)
+//	public void updateClassByClassId()
+//	{
+//
+//		ClassInfo newClass = new ClassInfo();
+//		BigInteger b = new BigInteger("3");
+//		newClass.setName("hx");
+//		newClass.setCourseId(new BigInteger("3"));
+//		newClass.setDescription("nope");
+//		newClass.setSite("no where");
+//		newClass.setClassTime("buzhidao");
+//		newClass.setReportPercentage(50);
+//		newClass.setPresentationPercentage(50);
+//		newClass.setFivePointPercentage(20);
+//		newClass.setFourPointPercentage(30);
+//		newClass.setThreePointPercentage(50);
+//		try {
+//			 classService.updateClassByClassId(b,newClass);
+//		}catch (ClassNotFoundException e){
+//
+//		}
+//
+//	}
+//
+//	@RequestMapping(value="/deleteclass/{classId}" ,method = RequestMethod.POST)
+//	public String deleteClassByClassId(@PathVariable(name = "classId") String classId)
+//	{
+//		try {
+//			classService.deleteClassByClassId(new BigInteger(classId));
+//		}catch (ClassNotFoundException e){
+//
+//		}
+//		return null;
+//	}
 
 
 

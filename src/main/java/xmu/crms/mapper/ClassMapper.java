@@ -39,5 +39,4 @@ public interface ClassMapper {
     Course findCourseByCourseId(BigInteger courseId);
 
     Boolean deleteCourseSelectionById(@Param("userId")BigInteger userId, @Param("classId")BigInteger classId);
-
 }

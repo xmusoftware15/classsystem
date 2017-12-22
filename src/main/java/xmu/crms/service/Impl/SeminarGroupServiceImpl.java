@@ -16,47 +16,56 @@ public class SeminarGroupServiceImpl implements SeminarGroupService{
     private SeminarGroupDao seminarGroupDao;
     @Override
     public void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId) {
-
+        seminarGroupDao.deleteSeminarGroupMemberBySeminarGroupId(seminarGroupId);
     }
 
     @Override
-    public BigInteger insertSeminarGroupMemberById(BigInteger userId, BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException, UserNotFoundException, InvalidOperationException {
-        return null;
+    public void insertSeminarGroupMemberById(BigInteger userId, BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException, UserNotFoundException, InvalidOperationException {
+                seminarGroupDao.insertSeminarGroupMemberById(userId,groupId);
     }
 
     @Override
     public List<User> listSeminarGroupMemberByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+        List<User> list=seminarGroupDao.listSeminarGroupMemberByGroupId(groupId);
+        return list;
     }
 
     @Override
     public List<SeminarGroup> listSeminarGroupIdByStudentId(BigInteger userId) throws IllegalArgumentException {
+        List<SeminarGroup> list=seminarGroupDao.listSeminarGroupIdByStudentId(userId);
         return null;
     }
 
     @Override
     public BigInteger getSeminarGroupLeaderByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+        BigInteger leaderId=seminarGroupDao.getSeminarGroupLeaderByGroupId(groupId);
+        return leaderId;
     }
 
     @Override
     public List<SeminarGroup> listSeminarGroupBySeminarId(BigInteger seminarId) throws IllegalArgumentException, SeminarNotFoundException {
-        return null;
+        List<SeminarGroup> list=seminarGroupDao.listSeminarGroupBySeminarId(seminarId);
+        return list;
     }
 
     @Override
-    public void deleteSeminarGroupBySeminarId(BigInteger seminarId) throws IllegalArgumentException {
-
+    public void deleteSeminarGroupBySeminarId(BigInteger seminarId) throws IllegalArgumentException ,SeminarNotFoundException{
+        List<SeminarGroup> list=listSeminarGroupBySeminarId(seminarId);
+        for(SeminarGroup s:list){
+            deleteSeminarGroupMemberBySeminarGroupId(s.getId());
+        }
+              seminarGroupDao.deleteSeminarGroupBySeminarId(seminarId);
     }
 
     @Override
     public BigInteger insertSeminarGroupBySeminarId(BigInteger seminarId, SeminarGroup seminarGroup) throws IllegalArgumentException {
-        return null;
+         seminarGroupDao.insertSeminarGroupBySeminarId(seminarId,seminarGroup);
+return seminarGroup.getId();
     }
 
     @Override
-    public BigInteger insertSeminarGroupMemberByGroupId(BigInteger groupId, SeminarGroupMember seminarGroupMember) {
-        return null;
+    public void insertSeminarGroupMemberByGroupId(BigInteger groupId, SeminarGroupMember seminarGroupMember) {
+
     }
 
     @Override
@@ -70,8 +79,10 @@ public class SeminarGroupServiceImpl implements SeminarGroupService{
     }
 
     @Override
-    public BigInteger getSeminarGroupLeaderById(BigInteger userId, BigInteger seminarId) throws IllegalArgumentException {
-        return null;
+    public BigInteger getSeminarGroupLeaderById(BigInteger userId, BigInteger seminarId) throws IllegalArgumentException,GroupNotFoundException {
+        SeminarGroup seminarGroup=getSeminarGroupById(seminarId,userId);
+BigInteger leaderId=getSeminarGroupLeaderByGroupId(seminarGroup.getId());
+        return leaderId;
     }
 
     @Override
@@ -81,6 +92,7 @@ public class SeminarGroupServiceImpl implements SeminarGroupService{
 
     @Override
     public SeminarGroup getSeminarGroupById(BigInteger seminarId, BigInteger userId) throws IllegalArgumentException, GroupNotFoundException {
+
         return null;
     }
 
@@ -90,8 +102,8 @@ public class SeminarGroupServiceImpl implements SeminarGroupService{
     }
 
     @Override
-    public BigInteger insertTopicByGroupId(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+    public void insertTopicByGroupId(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException, GroupNotFoundException {
+
     }
 
     @Override

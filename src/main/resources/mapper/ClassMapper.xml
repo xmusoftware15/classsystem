@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xmu.crms.mapper.ClassMapper">
 
-    <resultMap id="ClassInfoResultMap" type="ClassInfo">
+    <resultMap id="resultClassInfo" type="ClassInfo">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="course_id" property="courseId"/>
         <result column="site" property="site"/>
         <result column="class_time" property="classTime"/>
         <result column="description" property="description"/>
@@ -14,7 +13,11 @@
         <result column="five_point_percentage" property="fivePointPercentage"/>
         <result column="four_point_percentage" property="fourPointPercentage"/>
         <result column="three_point_percentage" property="threePointPercentage"/>
+        <association property="course" column="course_id" javaType="Course"
+                     select="CommonMapper.selectCourse"/>
     </resultMap>
+
+
 
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
         DELETE FROM course_selection
@@ -26,7 +29,6 @@
       WHERE type = 1
       AND `name`=#{teacherName}
     </select>
-
 
     <select id="findCourseIdByteacherIdAndCourseName" resultType="Course">
         SELECT id FROM course
@@ -50,7 +52,6 @@
       WHERE course_id = #{courseId}
     </select>
 
-
     <select id="findClassByClassId" parameterType="BigInteger" resultMap="resultClassInfo">
         SELECT id,
         `name`,
@@ -67,11 +68,9 @@
         WHERE id = #{classId}
     </select>
 
-
     <update id="updateClassByClassId" parameterType="xmu.crms.entity.ClassInfo">
         UPDATE class_info
         set `name` = #{name},
-            course_id = #{courseId},
             description = #{description},
             site = #{site},
             class_time = #{classTime},
@@ -92,7 +91,6 @@
         INSERT INTO course_selection(class_id,student_id)
         VALUES (#{classId},#{userId})
     </insert>
-
 
     <select id="findStudentdByStudentId" parameterType="BigInteger" resultType="User">
         SELECT id FROM user_info
