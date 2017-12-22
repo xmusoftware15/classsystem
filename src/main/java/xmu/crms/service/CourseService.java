@@ -14,7 +14,7 @@ import xmu.crms.entity.*;
 public interface CourseService {
 	/**
 	 * 按userId获取与当前用户相关联的课程列表.
-	 * <p>老师与他相关联的课程列表<br> 
+	 * <p>老师与他相关联的课程列表<br>
 	 * @author ZhouZhongjun
 	 * @param userId 用户Id
 	 * @return null 课程列表
