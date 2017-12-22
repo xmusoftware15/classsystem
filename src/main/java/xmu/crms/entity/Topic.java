@@ -1,5 +1,4 @@
 package xmu.crms.entity;
-
 import java.math.BigInteger;
 
 public class Topic {
@@ -8,7 +7,7 @@ public class Topic {
 	private String description;
 	private Integer groupNumberLimit;
 	private Integer groupStudentLimit;
-	private BigInteger seminarId;
+	private Seminar seminar;
 	
 	public BigInteger getId() {
 		return id;
@@ -40,12 +39,11 @@ public class Topic {
 	public void setGroupStudentLimit(Integer groupStudentLimit) {
 		this.groupStudentLimit = groupStudentLimit;
 	}
-
-	public BigInteger getSeminarId() {
-		return seminarId;
+	public Seminar getSeminar() {
+		return seminar;
 	}
-
-	public void setSeminarId(BigInteger seminarId) {
-		this.seminarId = seminarId;
+	public void setSeminar(Seminar seminar) {
+		this.seminar = seminar;
 	}
+	
 }

@@ -1,31 +1,28 @@
 package xmu.crms.entity;
-
 import java.math.BigInteger;
 
 public class FixGroup {
 	private BigInteger id;
-	private BigInteger classInfoId;
-	private BigInteger leaderId;
+	private ClassInfo classInfo;
+	private User leader;
+	
 	public BigInteger getId() {
 		return id;
 	}
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	public BigInteger getClassInfoId() {
-		return classInfoId;
+	public ClassInfo getClassInfo() {
+		return classInfo;
 	}
-
-	public void setClassInfoId(BigInteger classInfoId) {
-		this.classInfoId = classInfoId;
+	public void setClassInfo(ClassInfo classInfo) {
+		this.classInfo = classInfo;
 	}
-
-	public BigInteger getLeaderId() {
-		return leaderId;
+	public User getLeader() {
+		return leader;
 	}
-
-	public void setLeaderId(BigInteger leaderId) {
-		this.leaderId = leaderId;
+	public void setLeader(User leader) {
+		this.leader = leader;
 	}
+	
 }

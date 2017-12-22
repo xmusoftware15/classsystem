@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class Attendance {
 	private BigInteger id;
-	private BigInteger studentId;
-	private BigInteger classInfoId;
+	private User student;
+	private ClassInfo classInfo;
 	private Seminar seminar;
 	private Integer attendanceStatus;
 	
@@ -15,23 +15,18 @@ public class Attendance {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	public BigInteger getStudentId() {
-		return studentId;
+	public User getStudent() {
+		return student;
 	}
-
-	public void setStudentId(BigInteger studentId) {
-		this.studentId = studentId;
+	public void setStudent(User student) {
+		this.student = student;
 	}
-
-	public BigInteger getClassInfoId() {
-		return classInfoId;
+	public ClassInfo getClassInfo() {
+		return classInfo;
 	}
-
-	public void setClassInfoId(BigInteger classInfoId) {
-		this.classInfoId = classInfoId;
+	public void setClassInfo(ClassInfo classInfo) {
+		this.classInfo = classInfo;
 	}
-
 	public Seminar getSeminar() {
 		return seminar;
 	}

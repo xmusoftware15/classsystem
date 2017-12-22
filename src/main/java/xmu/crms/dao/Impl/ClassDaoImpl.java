@@ -9,6 +9,7 @@ import xmu.crms.entity.User;
 import xmu.crms.exception.CourseNotFoundException;
 import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.mapper.ClassMapper;
+import xmu.crms.pojo.Class;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -65,8 +66,66 @@ public class ClassDaoImpl implements ClassDao{
 
     @Override
     public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
+        newClass.setId(classId);
+        return classMapper.updateClassByClassId(newClass);
 
-        return classMapper.updateClassByClassId(classId,newClass);
+    }
 
+    @Override
+    public Boolean deleteClassByClassId(BigInteger classId) throws ClassNotFoundException {
+        ClassInfo classInfo = classMapper.findClassByClassId(classId);
+        if(classInfo == null){
+            throw new ClassNotFoundException();
+        }else{
+            classMapper.deleteClassByClassId(classId);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean insertCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
+        User student = classMapper.findStudentdByStudentId(userId);
+        if(student == null){
+            throw new UserNotFoundException();
+        }else {
+            ClassInfo classInfo = classMapper.findClassByClassId(classId);
+            if(classInfo == null){
+                throw new ClassNotFoundException();
+            }else{
+                classMapper.insertCourseSelectionById(userId,classId);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
+        User student = classMapper.findStudentdByStudentId(userId);
+        if(student == null){
+            throw new UserNotFoundException();
+        }else {
+            ClassInfo classInfo = classMapper.findClassByClassId(classId);
+            if(classInfo == null){
+                throw new ClassNotFoundException();
+            }else{
+                classMapper.deleteCourseSelectionById(userId,classId);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public BigInteger insertClassById(BigInteger userId, BigInteger courseId) throws UserNotFoundException, CourseNotFoundException {
+        User teacher = classMapper.findTeacherByTeacherId(userId);
+        if(teacher == null){
+            throw new UserNotFoundException();
+        }else {
+            Course course = classMapper.findCourseByCourseId(courseId);
+            if(course == null){
+                throw new CourseNotFoundException();
+            }
+        }
+        return null;
     }
 }

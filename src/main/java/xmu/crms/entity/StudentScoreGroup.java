@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class StudentScoreGroup {
 	private BigInteger id;
-	private BigInteger studentId;
-	private BigInteger seminarGroupTopicId;
+	private User student;
+	private SeminarGroupTopic seminarGroupTopic;
 	private Integer grade;
 	
 	public BigInteger getId() {
@@ -14,23 +14,18 @@ public class StudentScoreGroup {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	public BigInteger getStudentId() {
-		return studentId;
+	public User getStudent() {
+		return student;
 	}
-
-	public void setStudentId(BigInteger studentId) {
-		this.studentId = studentId;
+	public void setStudent(User student) {
+		this.student = student;
 	}
-
-	public BigInteger getSeminarGroupTopicId() {
-		return seminarGroupTopicId;
+	public SeminarGroupTopic getSeminarGroupTopic() {
+		return seminarGroupTopic;
 	}
-
-	public void setSeminarGroupTopicId(BigInteger seminarGroupTopicId) {
-		this.seminarGroupTopicId = seminarGroupTopicId;
+	public void setSeminarGroupTopic(SeminarGroupTopic seminarGroupTopic) {
+		this.seminarGroupTopic = seminarGroupTopic;
 	}
-
 	public Integer getGrade() {
 		return grade;
 	}

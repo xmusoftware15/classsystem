@@ -2,71 +2,43 @@ package xmu.crms.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.HashMap;
-
-import org.springframework.context.annotation.Bean;
 
 public class Event {
-	
-	private BigInteger id;
-	
-	private Date time;
-	
-	private Bean beanName;
-	
-	private HashMap<BigInteger, String> map;
 
-	public BigInteger getId() {
-		return id;
-	}
+    private BigInteger id;
+    private String bean;
+    private String parameter;
+    private Date time;
 
-	public void setId(BigInteger id) {
-		this.id = id;
-	}
+    public BigInteger getId() {
+        return id;
+    }
 
-	public Date getTime() {
-		return time;
-	}
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
 
-	public void setTime(Date time) {
-		this.time = time;
-	}
+    public String getBean() {
+        return bean;
+    }
 
-	public Bean getBeanName() {
-		return beanName;
-	}
+    public void setBean(String bean) {
+        this.bean = bean;
+    }
 
-	public void setBeanName(Bean beanName) {
-		this.beanName = beanName;
-	}
+    public String getParameter() {
+        return parameter;
+    }
 
-	public HashMap getMap() {
-		return map;
-	}
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
+    }
 
-	public void setMap(HashMap map) {
-		this.map = map;
-	}
+    public Date getTime() {
+        return time;
+    }
 
-	public Event() {
-		
-	}
-
-	public Event(BigInteger id, Date time, Bean beanName, HashMap map) {
-		super();
-		this.id = id;
-		this.time = time;
-		this.beanName = beanName;
-		this.map = map;
-	}
-
-	@Override
-	public String toString() {
-		return "Event [id=" + id + 
-				", time=" + time + 
-				", beanName=" + beanName + 
-				", map=" + map + 
-				"]";
-	}
-	
+    public void setTime(Date time) {
+        this.time = time;
+    }
 }

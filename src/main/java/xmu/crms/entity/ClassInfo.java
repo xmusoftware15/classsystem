@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class ClassInfo {
 	private BigInteger id;
 	private String name;
-	private BigInteger courseId;
+	private Course course;
 	private String site;
 	private String classTime;
 	private String description;
@@ -27,15 +27,12 @@ public class ClassInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public BigInteger getCourseId() {
-		return courseId;
+	public Course getCourse() {
+		return course;
 	}
-
-	public void setCourseId(BigInteger courseId) {
-		this.courseId = courseId;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
-
 	public String getSite() {
 		return site;
 	}

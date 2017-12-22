@@ -26,9 +26,18 @@ public interface ClassMapper {
 
     ClassInfo findClassByClassId(BigInteger classId);
 
-    Boolean updateClassByClassId(@Param("classId")BigInteger classId,@Param("newClass")ClassInfo newClass);
+    Boolean updateClassByClassId(ClassInfo newClass);
+
+    Boolean deleteClassByClassId(BigInteger classId);
+
+    Boolean insertCourseSelectionById(@Param("userId") BigInteger userId, @Param("classId") BigInteger classId);
+
+    User findStudentdByStudentId(BigInteger studentId);
+
+    User findTeacherByTeacherId(BigInteger teacherId);
 
     Course findCourseByCourseId(BigInteger courseId);
 
+    Boolean deleteCourseSelectionById(@Param("userId")BigInteger userId, @Param("classId")BigInteger classId);
 
 }

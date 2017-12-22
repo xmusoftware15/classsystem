@@ -70,6 +70,32 @@ public class ClassController {
 		return classes;
 	}
 
+	@RequestMapping(value="/insertCourseSelectionById/{classId}/{studentId}" ,method = RequestMethod.POST)
+	public void insertCourseSelectionById(@PathVariable(name = "classId") BigInteger classId,@PathVariable(name = "studentId") BigInteger studentId)
+	{
+		try {
+			classService.insertCourseSelectionById(studentId,classId);
+		}catch (UserNotFoundException e){
+
+		}catch (ClassNotFoundException e){
+
+		}
+
+	}
+
+	@RequestMapping(value="/deleteCourseSelectionById/{classId}/{studentId}" ,method = RequestMethod.POST)
+	public void deleteCourseSelectionById(@PathVariable(name = "classId") BigInteger classId,@PathVariable(name = "studentId") BigInteger studentId)
+	{
+		try {
+			classService.deleteCourseSelectionById(studentId,classId);
+		}catch (UserNotFoundException e){
+
+		}catch (ClassNotFoundException e){
+
+		}
+
+	}
+
 
 	@RequestMapping(value="/searchclassbyclassid/{classId}" ,method = RequestMethod.POST)
 	public ClassInfo findClassByClassId(@PathVariable(name = "classId") BigInteger classId)
@@ -83,29 +109,41 @@ public class ClassController {
 		return classInfo;
 	}
 
-//	@RequestMapping(value="/updateClassByClassId" ,method = RequestMethod.POST)
-//	public String updateClassByClassId()
-//	{
-//
-//		ClassInfo newClass = new ClassInfo();
-//		newClass.setName("hxr");
-//		//newClass.setCourseId(new BigInteger("3"));
-//		newClass.setDescription("nope");
-//		newClass.setSite("no where");
-//		newClass.setClassTime("buzhidao");
-//		newClass.setReportPercentage(50);
-//		newClass.setPresentationPercentage(50);
-//		newClass.setFivePointPercentage(20);
-//		newClass.setFourPointPercentage(30);
-//		newClass.setThreePointPercentage(50);
-//		try {
-//			classService.updateClassByClassId(new BigInteger("3"),newClass);
-//		}catch (ClassNotFoundException e){
-//
-//		}
-//
-//
-//	}
+	@RequestMapping(value="/updateClassByClassId" ,method = RequestMethod.POST)
+	public void updateClassByClassId()
+	{
+
+		ClassInfo newClass = new ClassInfo();
+		BigInteger b = new BigInteger("3");
+		newClass.setName("hx");
+		newClass.setCourseId(new BigInteger("3"));
+		newClass.setDescription("nope");
+		newClass.setSite("no where");
+		newClass.setClassTime("buzhidao");
+		newClass.setReportPercentage(50);
+		newClass.setPresentationPercentage(50);
+		newClass.setFivePointPercentage(20);
+		newClass.setFourPointPercentage(30);
+		newClass.setThreePointPercentage(50);
+		try {
+			 classService.updateClassByClassId(b,newClass);
+		}catch (ClassNotFoundException e){
+
+		}
+
+	}
+
+	@RequestMapping(value="/deleteclass/{classId}" ,method = RequestMethod.POST)
+	public String deleteClassByClassId(@PathVariable(name = "classId") String classId)
+	{
+		try {
+			classService.deleteClassByClassId(new BigInteger(classId));
+		}catch (ClassNotFoundException e){
+
+		}
+		return null;
+	}
+
 
 
 

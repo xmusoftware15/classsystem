@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xmu.crms.mapper.ClassMapper">
-    <resultMap id="resultUser" type="User">
-        <result column="id" property="id"/>
-        <result column="phone" property="phone"/>
-        <result column="wechat_id" property="wechatId"/>
-        <result column="openid" property="openId"/>
-        <result column="avatar" property="avatar"/>
-        <result column="password" property="password"/>
-        <result column="name" property="name"/>
-        <result column="school_id" property="schoolId"/>
-        <result column="gender" property="gender"/>
-        <result column="type" property="type"/>
-        <result column="number" property="number"/>
-        <result column="education" property="education"/>
-        <result column="title" property="title"/>
-        <result column="email" property="email"/>
-    </resultMap>
 
-    <resultMap id="resultClassInfo" type="ClassInfo">
+    <resultMap id="ClassInfoResultMap" type="ClassInfo">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <!--<result column="course_id" property="courseId"/>-->
+        <result column="course_id" property="courseId"/>
         <result column="site" property="site"/>
         <result column="class_time" property="classTime"/>
         <result column="description" property="description"/>
@@ -30,10 +14,6 @@
         <result column="five_point_percentage" property="fivePointPercentage"/>
         <result column="four_point_percentage" property="fourPointPercentage"/>
         <result column="three_point_percentage" property="threePointPercentage"/>
-
-        <association property="course" javaType="xmu.crms.entity.Course"
-                     select="xmu.crms.mapper.ClassMapper.findCourseByCourseId" column="course_id">
-        </association>
     </resultMap>
 
     <delete id="deleteClassSelectionByClassId" parameterType="BigInteger">
@@ -47,11 +27,6 @@
       AND `name`=#{teacherName}
     </select>
 
-    <select id="findTeacherIdByteacherName" parameterType="String" resultType="Course">
-        SELECT id FROM user_info
-        WHERE type = 1
-        AND `name`=#{teacherName}
-    </select>
 
     <select id="findCourseIdByteacherIdAndCourseName" resultType="Course">
         SELECT id FROM course
@@ -93,7 +68,7 @@
     </select>
 
 
-    <update id="updateClassByClassId" >
+    <update id="updateClassByClassId" parameterType="xmu.crms.entity.ClassInfo">
         UPDATE class_info
         set `name` = #{name},
             course_id = #{courseId},
@@ -105,6 +80,42 @@
             five_point_percentage = #{fivePointPercentage},
             four_point_percentage = #{fivePointPercentage},
             three_point_percentage = #{threePointPercentage}
-        WHERE id = #{classId}
+        WHERE id = #{id}
     </update>
+
+    <delete id="deleteClassByClassId" parameterType="BigInteger">
+        DELETE FROM class_info
+        WHERE id=#{classId}
+    </delete>
+
+    <insert id="insertCourseSelectionById">
+        INSERT INTO course_selection(class_id,student_id)
+        VALUES (#{classId},#{userId})
+    </insert>
+
+
+    <select id="findStudentdByStudentId" parameterType="BigInteger" resultType="User">
+        SELECT id FROM user_info
+        WHERE type = 0
+        AND id = #{studentId}
+    </select>
+
+    <delete id="deleteCourseSelectionById" parameterType="BigInteger">
+        DELETE FROM course_selection
+        WHERE class_id = #{classId}
+        AND student_id = #{userId}
+    </delete>
+
+    <select id="findTeacherByTeacherId" parameterType="BigInteger" resultType="User">
+        SELECT id FROM user_info
+        WHERE type = 1
+        AND id = #{teacherId}
+    </select>
+
+    <select id="findCourseByCourseId" parameterType="BigInteger" resultType="User">
+        SELECT id FROM user_info
+        WHERE type = 1
+        AND id = #{teacherId}
+    </select>
+
 </mapper>

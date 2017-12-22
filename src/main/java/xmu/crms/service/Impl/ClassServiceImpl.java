@@ -1,9 +1,11 @@
 package xmu.crms.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import xmu.crms.dao.ClassDao;
 import xmu.crms.entity.ClassInfo;
+import xmu.crms.entity.Location;
 import xmu.crms.exception.CourseNotFoundException;
 import xmu.crms.exception.InvalidOperationException;
 import xmu.crms.exception.SeminarNotFoundException;
@@ -19,24 +21,26 @@ public class ClassServiceImpl implements ClassService{
 
     @Autowired
     private ClassDao classDao;
+
     @Override
     public Boolean deleteClassSelectionByClassId(BigInteger classId) {
-        return classDao.deleteClassSelectionByClassId(classId);
+        
+        return null;
     }
 
     @Override
     public List<ClassInfo> listClassByName(String courseName, String teacherName) throws UserNotFoundException, CourseNotFoundException {
-        return classDao.listClassByName(courseName,teacherName);
+        return null;
     }
 
     @Override
     public List<ClassInfo> listClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
-        return classDao.findClassByCourseId(courseId);
+        return null;
     }
 
     @Override
     public ClassInfo getClassByClassId(BigInteger classId) throws ClassNotFoundException {
-        return classDao.findClassByClassId(classId);
+        return null;
     }
 
     @Override
@@ -60,13 +64,12 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public ClassInfo getCallStatusById(BigInteger seminarId) throws SeminarNotFoundException {
+    public Location getCallStatusById(BigInteger seminarId) throws SeminarNotFoundException {
         return null;
     }
 
-
     @Override
-    public BigInteger insertClassById(BigInteger userId, BigInteger courseId) throws UserNotFoundException, CourseNotFoundException {
+    public BigInteger insertClassById(BigInteger userId, BigInteger courseId, ClassInfo classInfo) throws UserNotFoundException, CourseNotFoundException {
         return null;
     }
 

@@ -22,4 +22,17 @@ public interface ClassDao {
 
     Boolean updateClassByClassId(BigInteger classId,ClassInfo newClass) throws
             ClassNotFoundException;
+
+    Boolean deleteClassByClassId(BigInteger classId)
+            throws ClassNotFoundException;
+
+    Boolean insertCourseSelectionById(BigInteger userId, BigInteger classId) throws
+            UserNotFoundException,ClassNotFoundException;
+
+    Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws
+            UserNotFoundException,ClassNotFoundException;
+
+    BigInteger insertClassById(BigInteger userId, BigInteger courseId) throws
+            UserNotFoundException,CourseNotFoundException;
+
 }
