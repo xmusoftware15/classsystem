@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, CourseNotFoundException, ClassNotFoundException {
+    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassNotFoundException {
         return null;
     }
 }

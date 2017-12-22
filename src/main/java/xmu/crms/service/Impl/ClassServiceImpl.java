@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 import xmu.crms.dao.ClassDao;
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Location;
-import xmu.crms.exception.CourseNotFoundException;
-import xmu.crms.exception.InvalidOperationException;
-import xmu.crms.exception.SeminarNotFoundException;
-import xmu.crms.exception.UserNotFoundException;
+import xmu.crms.entity.Seminar;
+import xmu.crms.exception.*;
 import xmu.crms.service.ClassService;
+import xmu.crms.service.SeminarGroupService;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,10 +20,11 @@ public class ClassServiceImpl implements ClassService{
 
     @Autowired
     private ClassDao classDao;
+    private SeminarGroupService seminarGroupService;
 
     @Override
-    public Boolean deleteClassSelectionByClassId(BigInteger classId) {
-         return classDao.deleteClassSelectionByClassId(classId);
+    public void deleteClassSelectionByClassId(BigInteger classId) {
+        classDao.deleteClassSelectionByClassId(classId);
     }
 
     @Override
@@ -43,35 +43,43 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public ClassInfo getClassByClassId(BigInteger classId) throws ClassNotFoundException {
+    public ClassInfo getClassByClassId(BigInteger classId) throws ClassesNotFoundException {
         ClassInfo classInfo = classDao.findClassByClassId(classId);
         return classInfo;
     }
 
     @Override
-    public Boolean updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassNotFoundException {
-        return classDao.updateClassByClassId(classId,newClass);
+    public void updateClassByClassId(BigInteger classId, ClassInfo newClass) throws ClassesNotFoundException {
+        classDao.updateClassByClassId(classId,newClass);
     }
 
     @Override
-    public Boolean deleteClassByClassId(BigInteger classId) throws ClassNotFoundException {
-        return null;
+    public void deleteClassByClassId(BigInteger classId) throws ClassesNotFoundException {
+        classDao.deleteClassByClassId(classId);
     }
 
     @Override
-    public String insertCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
-        return null;
+    public BigInteger insertCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassesNotFoundException {
+        if(classDao.insertCourseSelectionById(userId,classId)){
+            BigInteger id = classDao.findCourseIdByUserIdAndClassId(userId,classId);
+            return id;
+        }else {
+            return null;
+        }
+
     }
 
     @Override
-    public Boolean deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassNotFoundException {
-        return null;
+    public void deleteCourseSelectionById(BigInteger userId, BigInteger classId) throws UserNotFoundException, ClassesNotFoundException {
+        classDao.deleteCourseSelectionById(userId,classId);
     }
 
     @Override
-    public Location getCallStatusById(BigInteger seminarId) throws SeminarNotFoundException {
-        return null;
+    public Location getCallStatusById(BigInteger classId, BigInteger seminarId) throws SeminarNotFoundException {
+        Location location = classDao.getCallStatusById(classId,seminarId);
+        return location;
     }
+
 
     @Override
     public BigInteger insertClassById(BigInteger userId, BigInteger courseId, ClassInfo classInfo) throws UserNotFoundException, CourseNotFoundException {
@@ -79,27 +87,27 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public Boolean deleteClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
+    public void deleteClassByCourseId(BigInteger courseId) throws CourseNotFoundException {
+        return ;
+    }
+
+    @Override
+    public void deleteScoreRuleById(BigInteger classId) throws ClassesNotFoundException {
+        return ;
+    }
+
+    @Override
+    public ClassInfo getScoreRule(BigInteger classId) throws ClassesNotFoundException {
         return null;
     }
 
     @Override
-    public Boolean deleteScoreRuleById(BigInteger classId) throws ClassNotFoundException {
+    public BigInteger insertScoreRule(BigInteger classId, ClassInfo proportions) throws InvalidOperationException, ClassesNotFoundException {
         return null;
     }
 
     @Override
-    public ClassInfo getScoreRule(BigInteger classId) throws ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public BigInteger insertScoreRule(BigInteger classId, ClassInfo proportions) throws InvalidOperationException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
-    public Boolean updateScoreRule(BigInteger classId, ClassInfo proportions) throws InvalidOperationException, ClassNotFoundException {
-        return null;
+    public void updateScoreRule(BigInteger classId, ClassInfo proportions) throws InvalidOperationException, ClassesNotFoundException {
+        return ;
     }
 }
