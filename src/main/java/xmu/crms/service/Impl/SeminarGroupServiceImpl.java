@@ -2,19 +2,17 @@ package xmu.crms.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import xmu.crms.dao.SeminarGroupDao;
-import xmu.crms.entity.Attendance;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
 import xmu.crms.entity.User;
 import xmu.crms.exception.*;
 import xmu.crms.service.SeminarGroupService;
-import xmu.crms.service.UserService;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeminarGroupServiceImpl implements SeminarGroupService{
+public class SeminarGroupServiceImpl implements SeminarGroupService {
     @Autowired
     private SeminarGroupDao seminarGroupDao;
     @Override
@@ -87,9 +85,9 @@ seminarGroupDao.deleteSeminarGroupByGroupId(seminarGroupId);
     }
 
     @Override
-    public List<SeminarGroupMember> getSeminarGroupByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
-       List<SeminarGroupMember> list=seminarGroupDao.listSeminarGroupMemberByGroupId(groupId);
-        return list;
+    public SeminarGroup getSeminarGroupByGroupId(BigInteger groupId) throws IllegalArgumentException, GroupNotFoundException {
+       SeminarGroup seminarGroup=seminarGroupDao.getSeminarGroupByGroupId(groupId);
+        return seminarGroup;
     }
 
     @Override

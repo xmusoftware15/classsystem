@@ -2,8 +2,6 @@ package xmu.crms.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import xmu.crms.entity.SeminarGroup;
-import xmu.crms.exception.GroupNotFoundException;
-import xmu.crms.service.SeminarGroupService;
 
 import java.math.BigInteger;
 import java.util.List;
