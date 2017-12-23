@@ -90,8 +90,9 @@ public interface CourseService {
 	 * @return list 班级列表
 	 * @see CourseService #listCourseByCourseName(String courseName)
 	 * @see ClassService #listClassByCourseId(BigInteger courseId)
+	 * @exception CourseNotFoundException 无此课程Id
 	 */
-	 List<ClassInfo> listClassByCourseName(String courseName);
+	 List<ClassInfo> listClassByCourseName(String courseName)throws CourseNotFoundException;
 
 
 	/**
@@ -102,8 +103,12 @@ public interface CourseService {
 	 * @return list 班级列表
 	 * @see UserService #listUserIdByUserName(String userName)
 	 * @see CourseService #listClassByUserId(BigInteger userId)
+	 * @exception IllegalArgumentException throws when 信息不合法，id格式错误
+	 * @exception UserNotFoundException throws when 未找到对应用户
+	 * @exception ClassesNotFoundException 未找到班级
 	 */
-	 List<ClassInfo> listClassByTeacherName(String teacherName);
+	 List<ClassInfo> listClassByTeacherName(String teacherName)throws
+			 IllegalArgumentException,UserNotFoundException,ClassesNotFoundException;
 
 
 	/**
@@ -112,10 +117,9 @@ public interface CourseService {
 	 * @author YeXiaona
 	 * @param userId 学生ID
 	 * @return list 班级列表
-	 * @see ClassService #getClassByClassId(BigInteger classId)
 	 * @exception IllegalArgumentException userId格式错误时抛出或courseId格式错误时抛出
-	 * @exception ClassNotFoundException 未找到班级
+	 * @exception ClassesNotFoundException 未找到班级
 	 */
-	 List<ClassInfo> listClassByUserId(BigInteger userId)throws IllegalArgumentException,ClassNotFoundException;
+	 List<ClassInfo> listClassByUserId(BigInteger userId)throws IllegalArgumentException,ClassesNotFoundException;
 }
 
