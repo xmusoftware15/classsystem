@@ -22,10 +22,13 @@ import java.util.List;
 @Service
 public class CourseServiceImpl implements CourseService{
 
+    @Autowired
     private CourseDao courseDao;
 
+    @Autowired
     private ClassService classService;
 
+    @Autowired
     private UserService userService;
 
     @Override
@@ -77,14 +80,10 @@ public class CourseServiceImpl implements CourseService{
         List<ClassInfo> classInfos = new ArrayList<ClassInfo>();
         for(User user : users){
             List<ClassInfo> classInfos1;
-            classInfos1 = listClassByUserId(user.getId());
+            classInfos1 = classService.listClassByUserId(user.getId());
             classInfos.addAll(classInfos1);
         }
         return classInfos;
     }
 
-    @Override
-    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException {
-        return courseDao.listClassByUserId(userId);
-    }
 }
