@@ -18,9 +18,10 @@ public class TimerServiceImpl implements TimerService{
 	}
 
 	@Override
-	public void updateEvent(Date time, String beanName, String methodName, HashMap<BigInteger, String> paramMap) {
+	public void updateEvent(BigInteger eventId, Date newTime) {
 
 	}
+
 
 	@Override
 	public void scheduled() {
