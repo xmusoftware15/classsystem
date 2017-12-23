@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xmu.crms.mapper.CourseMapper">
+    <resultMap id="ResultCourse" type="xmu.crms.entity.Course" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="start_date" property="startDate" jdbcType="DATE" />
+        <result column="end_date" property="endDate" jdbcType="DATE" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="report_percentage" property="reportPercentage" jdbcType="TINYINT" />
+        <result column="presentation_percentage" property="presentationPercentage" jdbcType="TINYINT" />
+        <result column="five_point_percentage" property="fivePointPercentage" jdbcType="TINYINT" />
+        <result column="four_point_percentage" property="fourPointPercentage" jdbcType="TINYINT" />
+        <result column="three_point_percentage" property="threePointPercentage" jdbcType="TINYINT" />
+        <association column="teacher_id" property="teacher" jdbcType="BIGINT" javaType="xmu.crms.entity.User"
+                     select="CommonMapper.selectUser"/>
+    </resultMap>
+
+    <resultMap id="ResultClassInfo" type="xmu.crms.entity.ClassInfo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="site" property="site"/>
+        <result column="class_time" property="classTime"/>
+        <result column="description" property="description"/>
+        <result column="report_percentage" property="reportPercentage"/>
+        <result column="presentation_percentage" property="presentationPercentage"/>
+        <result column="five_point_percentage" property="fivePointPercentage"/>
+        <result column="four_point_percentage" property="fourPointPercentage"/>
+        <result column="three_point_percentage" property="threePointPercentage"/>
+        <association column="course_id" property="course" javaType="Course"
+                     select="CommonMapper.selectCourse"/>
+    </resultMap>
+
+    <sql id="Course_Column_List">
+        id,`name`,start_date,end_date,teacher_id,description,report_percentage,presentation_percentage,
+        five_point_percentage,four_point_percentage,three_point_percentage
+    </sql>
+
+    <sql id="Class_Column_List">
+        id,`name`,course_id,site,class_time,description,report_percentage,presentation_percentage,
+        five_point_percentage,four_point_percentage,three_point_percentage
+    </sql>
+
+    <select id="listCourseByUserId" resultMap="ResultCourse" parameterType="java.math.BigInteger">
+        SELECT
+        <include refid="Course_Column_List"/>
+        FROM course
+        WHERE teacher_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertCourseByUserId" useGeneratedKeys="true" keyProperty="course.id">
+        INSERT INTO course(id,`name`,start_date,end_date,teacher_id,description,report_percentage,
+        presentation_percentage,five_point_percentage,four_point_percentage,three_point_percentage)
+        VALUES (#{course.name,jdbcType=VARCHAR},#{course.startDate,jdbcType=DATE},#{course.endDate,jdbcType=DATE},#{userId,jdbcType=BIGINT},
+        #{course.description,jdbcType=VARCHAR},#{course.reportPercentage,jdbcTypr=TINYINT},#{course.fivePointPercentage,jdbcType=TINYINT},
+        #{course.fourPointPercentage,jdbcType=TINYINT},#{course.threePointPercentage,jdbcType=TINYINT})
+    </insert>
+
+    <select id="selectCourseByCourseId" resultMap="ResultCourse" parameterType="java.math.BigInteger">
+        SELECT
+        <include refid="Course_Column_List"/>
+        FROM course
+        WHERE id = #{courseId,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateCourseByCourseId">
+        UPDATE course
+        SET
+        `name` = #{course.name,jdbcType=VARCHAR},
+        start_date = #{course.startDate,jdbcType=DATE},
+        end_date = #{course.endDate,jdbcType=DATE},
+        teacher_id = #{course.teacher.id,jdbcType=BIGINT},
+        description = #{course.description,jdbcType=VARCHAR},
+        report_percentage = #{course.reportPercentage,jdbcType=TINYINT},
+        presentation_percentage = #{course.presentationPercentage,jdbcType=TINYINT},
+        five_point_percentage = #{course.fivePointPercentage,jdbcType=TINYINT},
+        four_point_percentage = #{course.fourPointPercentage,jdbcType=TINYINT},
+        three_point_percentage = #{course.threePointPercentage,jdbcType=TINYINT}
+        WHERE id = #{courseId,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteCourseByCourseId" parameterType="java.math.BigInteger">
+        DELETE FROM course WHERE id = #{courseId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="listCourseByCourseName" resultMap="ResultCourse" parameterType="java.lang.String" >
+        SELECT
+        <include refid="Course_Column_List"/>
+        FROM course
+        WHERE `name` = #{courseName,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="listClassByUserId" resultMap="ResultClassInfo" parameterType="java.math.BigInteger">
+        SELECT
+        <include refid="Class_Column_List"/>
+        FROM class_info,course_selection
+        WHERE class_info.id = course_selection.class_id AND course_selection.student_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

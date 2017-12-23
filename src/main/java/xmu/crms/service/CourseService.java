@@ -113,6 +113,5 @@ public interface CourseService {
      */
     List<ClassInfo> listClassByTeacherName(String teacherName);
 
-
 }
 

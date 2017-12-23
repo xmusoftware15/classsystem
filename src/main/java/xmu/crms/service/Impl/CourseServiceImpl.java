@@ -7,21 +7,26 @@ import org.springframework.stereotype.Service;
 import xmu.crms.dao.CourseDao;
 import xmu.crms.entity.ClassInfo;
 import xmu.crms.entity.Course;
+import xmu.crms.entity.User;
 import xmu.crms.exception.CourseNotFoundException;
+import xmu.crms.exception.ClassesNotFoundException;
+import xmu.crms.exception.UserNotFoundException;
 import xmu.crms.service.ClassService;
 import xmu.crms.service.CourseService;
+import xmu.crms.service.UserService;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CourseServiceImpl implements CourseService{
 
-    @Autowired
     private CourseDao courseDao;
 
-    @Autowired
     private ClassService classService;
+
+    private UserService userService;
 
     @Override
     public List<Course> listCourseByUserId(BigInteger userId) throws IllegalArgumentException, CourseNotFoundException {
@@ -54,21 +59,32 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<ClassInfo> listClassByCourseName(String courseName) {
+    public List<ClassInfo> listClassByCourseName(String courseName)throws CourseNotFoundException {
         List<Course> courses = listCourseByCourseName(courseName);
-        List<ClassInfo> classInfos;
+        List<ClassInfo> classInfos = new ArrayList<ClassInfo>();
         for(Course course : courses){
-            classService.listClassByCourseId(course.getId())
+            List<ClassInfo> classInfos1;
+            classInfos1 = classService.listClassByCourseId(course.getId());
+            classInfos.addAll(classInfos1);
         }
+        return classInfos;
     }
 
     @Override
-    public List<ClassInfo> listClassByTeacherName(String teacherName) {
-        return null;
+    public List<ClassInfo> listClassByTeacherName(String teacherName) throws
+            IllegalArgumentException,UserNotFoundException ,ClassesNotFoundException{
+        List<User> users = userService.listUserByUserName(teacherName);
+        List<ClassInfo> classInfos = new ArrayList<ClassInfo>();
+        for(User user : users){
+            List<ClassInfo> classInfos1;
+            classInfos1 = listClassByUserId(user.getId());
+            classInfos.addAll(classInfos1);
+        }
+        return classInfos;
     }
 
     @Override
-    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassNotFoundException {
-        return null;
+    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException {
+        return courseDao.listClassByUserId(userId);
     }
 }
