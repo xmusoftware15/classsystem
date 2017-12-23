@@ -3,6 +3,7 @@ package xmu.crms.dao;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
 import xmu.crms.exception.*;
+import xmu.crms.service.SeminarGroupService;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -187,5 +188,5 @@ public interface SeminarGroupDao {
      * @exception InvalidOperationException 已经有组长了
      */
     void updateSeminarGroupById(BigInteger groupId,BigInteger userId) throws
-            IllegalArgumentException, UserNotFoundException, GroupNotFoundException;
+            IllegalArgumentException, UserNotFoundException, GroupNotFoundException, InvalidOperationException;
 }
