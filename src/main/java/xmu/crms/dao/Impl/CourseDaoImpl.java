@@ -61,16 +61,4 @@ public class CourseDaoImpl implements CourseDao{
         return courseMapper.listCourseByCourseName(courseName);
     }
 
-    @Override
-    public List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException{
-        List<ClassInfo> classInfos;
-        classInfos = courseMapper.listClassByUserId(userId);
-        if(classInfos == null){
-            throw new ClassesNotFoundException();
-        }
-        else {
-            return classInfos;
-        }
-    }
-
 }

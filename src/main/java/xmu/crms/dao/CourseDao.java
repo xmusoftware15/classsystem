@@ -22,5 +22,4 @@ public interface CourseDao {
 
     List<Course> listCourseByCourseName(String courseName);
 
-    List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException;
 }

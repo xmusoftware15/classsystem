@@ -23,5 +23,4 @@ public interface CourseMapper {
 
     List<Course> listCourseByCourseName(String courseName);
 
-    List<ClassInfo> listClassByUserId(BigInteger userId) throws IllegalArgumentException, ClassesNotFoundException;
 }
