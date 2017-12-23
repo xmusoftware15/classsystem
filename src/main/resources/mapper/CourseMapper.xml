@@ -90,11 +90,5 @@
         WHERE `name` = #{courseName,jdbcType=VARCHAR}
     </select>
     
-    <select id="listClassByUserId" resultMap="ResultClassInfo" parameterType="java.math.BigInteger">
-        SELECT
-        <include refid="Class_Column_List"/>
-        FROM class_info,course_selection
-        WHERE class_info.id = course_selection.class_id AND course_selection.student_id = #{userId,jdbcType=BIGINT}
-    </select>
 
 </mapper>
