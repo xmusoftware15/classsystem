@@ -2,11 +2,13 @@ package xmu.crms.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import xmu.crms.dao.SeminarGroupDao;
+import xmu.crms.entity.Attendance;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
 import xmu.crms.entity.User;
 import xmu.crms.exception.*;
 import xmu.crms.service.SeminarGroupService;
+import xmu.crms.service.UserService;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -99,6 +101,23 @@ BigInteger leaderId=getSeminarGroupLeaderByGroupId(seminarGroup.getId());
 
     @Override
     public void automaticallyGrouping(BigInteger seminarId, BigInteger classId) throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
+       List<Attendance> list= UserService.listAttendanceById(BigInteger classId, BigInteger seminarId);
+              int num=list.size();//签到的总人数
+              int groupmemberlimit=num/9;//每组人数
+              int left=num-groupmemberlimit*9;//不够整除，余下的人
+              int k=0;//数组指针
+              for(int i = 0;i<9;i++){
+               if(left!=0){
+                   for(int j=0;j<=groupmemberlimit;j++)
+                   {
+                       list.get(k+j).getStudent();
+
+                   }
+                   k+=groupmemberlimit+1;
+               }
+                else{}
+        }
+
 
     }
 

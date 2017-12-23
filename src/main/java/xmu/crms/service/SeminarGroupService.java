@@ -28,13 +28,6 @@ public interface SeminarGroupService {
      */
     void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
 
-	/**
-	 * 按seminarGroupId删除SeminarGroupMember信息.
-	 * <p>按seminarGroupId删除SeminarGroupMember信息<br>
-	 * @author zhouzhongjun
-	 * @param seminarGroupId 讨论课小组Id
-	 */
-	 void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId);
 
 	/**
 	 * 将学生加入讨论课小组.
