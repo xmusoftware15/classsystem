@@ -15,7 +15,7 @@ import xmu.crms.exception.SeminarNotFoundException;
 
 /**
  * @author ZhouChulun YeHongjie Heqi Aixing
- * @version 2.10
+ * @version 2.20
  */
 public interface FixGroupService {
 
@@ -31,7 +31,7 @@ public interface FixGroupService {
      * @author zhouzhongjun
      */
     public BigInteger insertFixGroupByClassId(BigInteger classId, BigInteger userId) throws
-            IllegalArgumentException, ClassesNotFoundException, UserNotFoundException;
+            IllegalArgumentException, UserNotFoundException;
 
     /**
      * 按FixGroupId删除FixGroupMember.

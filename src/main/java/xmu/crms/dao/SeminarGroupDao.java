@@ -105,7 +105,7 @@ public interface SeminarGroupDao {
      * @return BigInteger 若创建成功返回该小组的id，失败则返回-1
      * @exception IllegalArgumentException 信息不合法，id格式错误
      */
-    BigInteger insertSeminarGroupBySeminarId(BigInteger seminarId,SeminarGroup seminarGroup) throws IllegalArgumentException;
+    BigInteger insertSeminarGroupBySeminarId(BigInteger seminarId,BigInteger classId,SeminarGroup seminarGroup) throws IllegalArgumentException;
 
     /**
      * 创建小组成员信息.
@@ -140,25 +140,6 @@ public interface SeminarGroupDao {
      */
     SeminarGroup getSeminarGroupByGroupId(BigInteger groupId) throws
             IllegalArgumentException,GroupNotFoundException;
-
-
-
-
-    /**
-     * 定时器方法.
-     * 自动分组.
-     * <p>根据讨论课id和班级id，对签到的学生进行自动分组<br>
-     * @author YeHongjie
-     * @param seminarId 讨论课的id
-     * @param classId 班级的id
-     * @see UserService #listAttendanceById(BigInteger classId, BigInteger seminarId);
-     * @exception IllegalArgumentException 信息不合法，id格式错误
-     * @exception ClassesNotFoundException 未找到班级
-     * @exception SeminarNotFoundException 未找到讨论课
-     */
-    void automaticallyGrouping(BigInteger seminarId,BigInteger classId) throws
-            IllegalArgumentException,ClassesNotFoundException,SeminarNotFoundException;
-
 
     /**
      * 根据讨论课Id及用户id，获得该用户所在的讨论课的小组的信息.
@@ -208,18 +189,6 @@ public interface SeminarGroupDao {
      * @exception UserNotFoundException 不存在该学生
      * @exception InvalidOperationException 已经有组长了
      */
-    void assignLeaderById(BigInteger groupId,BigInteger userId) throws
-            IllegalArgumentException,UserNotFoundException,GroupNotFoundException,
-            InvalidOperationException;
-
-    /**
-     * 组长辞职.
-     * <p>同学按小组id和自身id,辞掉组长职位<br>
-     * @param groupId 小组id
-     * @param userId  学生id
-     * @exception IllegalArgumentException (信息不合法，id格式错误)
-     * @exception GroupNotFoundException (未找到小组)
-     */
-    void resignLeaderById(BigInteger groupId,BigInteger userId) throws
-            IllegalArgumentException,GroupNotFoundException;
+    void updateSeminarGroupById(BigInteger groupId,BigInteger userId) throws
+            IllegalArgumentException;
 }

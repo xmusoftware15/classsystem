@@ -83,7 +83,6 @@ public class Course {
 		this.threePointPercentage = threePointPercentage;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Course{" +

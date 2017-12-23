@@ -13,7 +13,7 @@ public interface SeminarGroupMapper {
  BigInteger getSeminarGroupLeaderByGroupId(BigInteger groupId);
  List<SeminarGroup> listSeminarGroupBySeminarId(BigInteger seminarId);
  void deleteSeminarGroupBySeminarId(BigInteger seminarId);
- void insertSeminarGroupBySeminarId(@Param("seminarId") BigInteger seminarId, @Param("seminarGroup") SeminarGroup seminarGroup);
+ void insertSeminarGroupBySeminarId(@Param("seminarId") BigInteger seminarId,@Param("classId")BigInteger classId, @Param("seminarGroup") SeminarGroup seminarGroup);
  /**
   * 删除讨论课小组.
   * <p>按照id删除讨论课小组<br>
@@ -23,6 +23,8 @@ public interface SeminarGroupMapper {
   * @exception IllegalArgumentException 信息不合法，id格式错误
   */
  void deleteSeminarGroupByGroupId(BigInteger seminarGroupId);
-
+SeminarGroup getSeminarGroupById(@Param("seminarId") BigInteger seminarId, @Param("userId") BigInteger userId);
+ List<SeminarGroup> selectSeminarGroupByTopicId(BigInteger topicId);
+ void updateSeminarGroupById(@Param("groupId") BigInteger groupId, @Param("userId") BigInteger userId);
 
 }

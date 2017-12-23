@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xmu.crms.mapper.SeminarGroupTopicMapper" >
+    <resultMap id="BaseResultMap" type="xmu.crms.entity.SeminarGroupTopic" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="presentation_grade" property="presentationGrade" jdbcType="INTEGER" />
+        <association property="topic" javaType="xmu.crms.entity.Topic"
+                     select="xmu.crms.mapper.CommonMapper.selectTopic" column="topic_id">
+        </association>
+        <association property="seminarGroup" javaType="xmu.crms.entity.SeminarGroup"
+                     select="xmu.crms.mapper.CommonMapper.selectTopic" column="seminar_group_id">
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, topic_id, seminar_group_id, presentation_grade
+    </sql>
+    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
+        <!--select-->
+        <!--<include refid="Base_Column_List" />-->
+        <!--from seminar_group_topic-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</select>-->
+    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >-->
+        <!--delete from seminar_group_topic-->
+        <!--where id = #{id,jdbcType=BIGINT}-->
+    <!--</delete>-->
+
+    <insert id="insertTopicByGroupId" useGeneratedKeys="true" keyProperty="seminarGroupTopicId" >
+        insert into seminar_group_topic
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="topicId != null" >
+                topic_id,
+            </if>
+            <if test="seminarGroupId != null" >
+                seminar_group_id,
+            </if>
+            <if test="presentationGrade != null" >
+                presentation_grade,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="topicId != null" >
+                #{topicId,jdbcType=BIGINT},
+            </if>
+            <if test="seminarGroupId != null" >
+                #{seminarGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="presentationGrade != null" >
+                #{presentationGrade,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

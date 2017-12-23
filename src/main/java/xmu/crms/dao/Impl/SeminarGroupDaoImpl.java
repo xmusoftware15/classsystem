@@ -8,6 +8,7 @@ import xmu.crms.entity.User;
 import xmu.crms.exception.*;
 import xmu.crms.mapper.SeminarGroupMapper;
 import xmu.crms.mapper.SeminarGroupMemberMapper;
+import xmu.crms.mapper.SeminarGroupTopicMapper;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class SeminarGroupDaoImpl implements SeminarGroupDao{
     private SeminarGroupMapper seminarGroupMapper;
     @Autowired
     private SeminarGroupMemberMapper seminarGroupMemberMapper;
+    @Autowired
+    private SeminarGroupTopicMapper seminarGroupTopicMapper;
     @Override
     public void deleteSeminarGroupMemberBySeminarGroupId(BigInteger seminarGroupId) {
 seminarGroupMemberMapper.deleteSeminarGroupMemberBySeminarGroupId(seminarGroupId);
@@ -70,8 +73,8 @@ seminarGroupMapper.deleteSeminarGroupBySeminarId(seminarId);
     }
 
     @Override
-    public BigInteger insertSeminarGroupBySeminarId( BigInteger seminarId,SeminarGroup seminarGroup) throws IllegalArgumentException {
-        seminarGroupMapper.insertSeminarGroupBySeminarId(seminarId,seminarGroup);
+    public BigInteger insertSeminarGroupBySeminarId( BigInteger seminarId,BigInteger classId,SeminarGroup seminarGroup) throws IllegalArgumentException {
+        seminarGroupMapper.insertSeminarGroupBySeminarId(seminarId,classId,seminarGroup);
         return  seminarGroup.getId();
     }
 
@@ -97,32 +100,27 @@ else{
 
 
     @Override
-    public void automaticallyGrouping(BigInteger seminarId, BigInteger classId) throws IllegalArgumentException, ClassesNotFoundException, SeminarNotFoundException {
-
-    }
-
-    @Override
     public SeminarGroup getSeminarGroupById(BigInteger seminarId, BigInteger userId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+        SeminarGroup seminarGroup=seminarGroupMapper.getSeminarGroupById(seminarId,userId);
+        return seminarGroup;
     }
 
     @Override
     public List<SeminarGroup> listGroupByTopicId(BigInteger topicId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+        List<SeminarGroup> list=seminarGroupMapper.selectSeminarGroupByTopicId(topicId);
+        return list;
     }
 
     @Override
     public BigInteger insertTopicByGroupId(BigInteger groupId, BigInteger topicId) throws IllegalArgumentException, GroupNotFoundException {
-        return null;
+        BigInteger seminarGroupTopicId=null;
+seminarGroupTopicMapper.insertTopicByGroupId(seminarGroupTopicId,groupId,topicId);
+return seminarGroupTopicId;
     }
 
     @Override
-    public void assignLeaderById(BigInteger groupId, BigInteger userId) throws IllegalArgumentException, UserNotFoundException, GroupNotFoundException, InvalidOperationException {
-
+    public void updateSeminarGroupById(BigInteger groupId, BigInteger userId) throws IllegalArgumentException, UserNotFoundException, GroupNotFoundException, InvalidOperationException {
+          seminarGroupMapper.updateSeminarGroupById(groupId,userId);
     }
 
-    @Override
-    public void resignLeaderById(BigInteger groupId, BigInteger userId) throws IllegalArgumentException, GroupNotFoundException {
-
-    }
 }
