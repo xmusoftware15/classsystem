@@ -1,11 +1,15 @@
 package xmu.crms.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 import xmu.crms.entity.SeminarGroup;
 
 import java.math.BigInteger;
 import java.util.List;
 
+@Component
+@Mapper
 public interface SeminarGroupMapper {
  SeminarGroup selectSeminarGroupByGroupId(BigInteger seminarGroupId);
  BigInteger getSeminarGroupLeaderByGroupId(BigInteger groupId);

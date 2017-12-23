@@ -1,15 +1,14 @@
-package xmu.crms.service.Impl;
+package xmu.crms.service.impl;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import xmu.crms.service.TimerService;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 
-@Component
+@Service
 public class TimerServiceImpl implements TimerService{
 
 	@Override

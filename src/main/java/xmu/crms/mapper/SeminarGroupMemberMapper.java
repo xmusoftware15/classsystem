@@ -1,6 +1,7 @@
 package xmu.crms.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
 import xmu.crms.entity.User;
@@ -9,6 +10,7 @@ import xmu.crms.exception.GroupNotFoundException;
 import java.math.BigInteger;
 import java.util.List;
 
+@Component
 public interface SeminarGroupMemberMapper {
     /**
      * 按seminarGroupId删除SeminarGroupMember信息.

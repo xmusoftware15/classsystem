@@ -11,6 +11,15 @@ public class SeminarGroup {
 	private Integer presentationGrade;
 	private Integer finalGrade;
 	private User leader;
+	private FixGroup fixGroup;
+
+	public FixGroup getFixGroup() {
+		return fixGroup;
+	}
+
+	public void setFixGroup(FixGroup fixGroup) {
+		this.fixGroup = fixGroup;
+	}
 
 	public BigInteger getId() {
 		return id;

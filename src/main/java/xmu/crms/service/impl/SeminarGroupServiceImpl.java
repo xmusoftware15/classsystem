@@ -1,6 +1,7 @@
-package xmu.crms.service.Impl;
+package xmu.crms.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import xmu.crms.dao.SeminarGroupDao;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
@@ -12,6 +13,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Huhui
+ */
+@Service
 public class SeminarGroupServiceImpl implements SeminarGroupService {
     @Autowired
     private SeminarGroupDao seminarGroupDao;

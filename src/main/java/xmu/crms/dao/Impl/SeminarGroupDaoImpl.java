@@ -1,6 +1,7 @@
 package xmu.crms.dao.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import xmu.crms.dao.SeminarGroupDao;
 import xmu.crms.entity.SeminarGroup;
 import xmu.crms.entity.SeminarGroupMember;
@@ -14,6 +15,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class SeminarGroupDaoImpl implements SeminarGroupDao{
     @Autowired
     private SeminarGroupMapper seminarGroupMapper;
